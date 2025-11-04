@@ -24,7 +24,7 @@
       --radius:14px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
+    html,body{margin:0;padding:0; scroll-behavior: smooth;}
     body{
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
       color:var(--ink); background:var(--bg); line-height:1.5;
@@ -89,6 +89,11 @@
     .cols-2{grid-template-columns:repeat(2,1fr)}
     .service{padding:18px}
     .service h3{margin:0 0 6px}
+    .service iframe {
+        margin-top: 16px;
+        border-radius: 8px;
+        border: 1px solid #e9eef6;
+    }
     ul{padding-left:18px; margin:8px 0}
     .steps{counter-reset:step}
     .step{
@@ -124,6 +129,16 @@
     .trust{display:flex; gap:16px; align-items:center; flex-wrap:wrap; color:#6b7280; font-size:14px}
     .trust .dot{width:8px; height:8px; background:#cfe0ff; border-radius:999px}
     .mobile-nav{display:none}
+    /* About Us Page Styles */
+    .about-header { background: var(--brand); color: white; padding: 40px 0; text-align: center; }
+    .about-header h1 { margin: 0; font-size: 2.5rem; }
+    .about-header p { font-size: 1.1rem; opacity: 0.9; }
+    .about-content { background: white; margin-top: -30px; border-radius: var(--radius); padding: 40px; box-shadow: 0 8px 32px rgba(14,110,251,0.07); }
+    .about-content h2 { color: var(--brand); border-bottom: 2px solid #e9eef6; padding-bottom: 10px; margin-top: 30px;}
+    .about-content h2:first-child { margin-top: 0; }
+    .about-content ul { list-style-type: none; padding-left: 0; }
+    .about-content ul li { background: #f7f9fc; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--brand); }
+
     @media (max-width: 900px){
       .hero-grid{grid-template-columns:1fr}
       .cols-3{grid-template-columns:1fr}
@@ -131,6 +146,10 @@
       .kpis{grid-template-columns:1fr}
       .nav-links{display:none}
       .mobile-nav{display:block}
+      /* Adjust footer for smaller screens to stack cols */
+      .footer .grid { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+      .footer .logo { justify-content: center; }
+      .footer ul { padding: 0; }
     }
   </style>
 </head>
@@ -151,9 +170,9 @@
         </div>
         <div class="nav-links">
           <a href="#services">Services</a>
+          <a href="#about">About Us</a>
           <a href="#how">How it works</a>
           <a href="#pricing">Pricing</a>
-          <a href="#resources">Resources</a>
           <a href="#faq">FAQ</a>
         </div>
         <div class="mobile-nav">
@@ -187,7 +206,7 @@
         <div>
           <div class="card hero-card" aria-labelledby="quick-check">
             <h2 id="quick-check">Quick pre-check</h2>
-            <p class="muted" style="margin-top:-6px">Tell us where you live and what you need. We’ll flag likely options in 1 minute.</p>
+            <p class="muted" style="margin-top:-6px">Tell us where you live and what you need. We'll flag likely options in 1 minute.</p>
             <form id="precheck">
               <div class="row">
                 <div>
@@ -204,7 +223,7 @@
                     <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
                     <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
                     <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
-                    <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+                    <option>NJ</option><option>NM selected</option><option>NY</option><option>NC</option><option>ND</option>
                     <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
                     <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
                     <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
@@ -235,7 +254,7 @@
               <div style="margin-top:10px">
                 <button class="btn" type="submit">Check my options</button>
               </div>
-              <p class="disclaimer" style="margin-top:8px">By submitting, you agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>. We won’t spam you.</p>
+              <p class="disclaimer" style="margin-top:8px">By submitting, you agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>. We won't spam you.</p>
             </form>
             <div id="precheck-result" class="notice" style="display:none; margin-top:12px" role="status" aria-live="polite"></div>
             <div class="kpis" aria-label="Quick facts">
@@ -245,6 +264,35 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background:var(--bg); padding-top: 0;">
+      <div class="container about-content">
+        <h2>Our Mission</h2>
+        <p class="mission">
+          At POWER PLAY Resource Center, we believe that everyone deserves a safe, stable place to call home—no matter their past or where they're starting from. Our passion is helping people who have made mistakes, faced setbacks, or are just getting started on their own, to have a real opportunity to obtain suitable housing and build a brighter future.
+        </p>
+        <h2>Why We Do This Work</h2>
+        <p>
+          We know that a single eviction, a past conviction, or a lack of rental history can close doors for good people. We've seen firsthand how hard it can be to move forward when the system keeps reminding you of your past. That's why we're here: to help you clear obstacles, understand your rights, and present your best self to landlords and lenders.
+        </p>
+        <ul>
+          <li><strong>Second Chances:</strong> We believe in redemption and new beginnings for everyone.</li>
+          <li><strong>Respect & Dignity:</strong> We treat every client with compassion, confidentiality, and respect.</li>
+          <li><strong>Empowerment:</strong> We give you the tools, knowledge, and support to advocate for yourself.</li>
+          <li><strong>Integrity:</strong> We are honest about what's possible and never make false promises.</li>
+          <li><strong>Community:</strong> We're proud to serve Albuquerque and the greater New Mexico community.</li>
+        </ul>
+        <h2>Who We Help</h2>
+        <p>
+          Whether you're rebuilding after a mistake, aging out of foster care, starting over after a tough time, or just need a fair shot at your first apartment, we're here for you. Our team works with people from all walks of life—because everyone deserves a place to call home.
+        </p>
+        <h2>Meet Our Team</h2>
+        <p>
+          POWER PLAY Resource Center is made up of dedicated advocates, housing specialists, and credit experts who care deeply about your success. We bring years of experience in housing, credit, and community support, and we're committed to walking with you every step of the way.
+        </p>
       </div>
     </section>
 
@@ -262,7 +310,8 @@
               <li>Explore court record sealing/expungement where your state allows</li>
               <li>Landlord reference strategy + application coaching</li>
             </ul>
-            <p class="disclaimer">We don’t remove accurate, verifiable public records. We help fix errors and pursue lawful remedies.</p>
+            <p class="disclaimer">We don't remove accurate, verifiable public records. We help fix errors and pursue lawful remedies.</p>
+            <iframe src="https://forms.gle/vFGRDucVWqBJvwr1A" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Eviction Report Removal Form">Loading…</iframe>
           </div>
           <div class="card service">
             <span class="tag">Record relief (expungement/sealing)</span>
@@ -274,6 +323,7 @@
               <li>Post-relief updates to background and screening providers</li>
             </ul>
             <p class="disclaimer">We are not a law firm and do not provide legal advice. Legal work is handled by partner attorneys where permitted.</p>
+            <iframe src="https://forms.gle/KDnrT4XWq7DZsmHJ8" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Conviction Relief Form">Loading…</iframe>
           </div>
           <div class="card service">
             <span class="tag">No rental history support</span>
@@ -284,7 +334,8 @@
               <li>Guarantor/co-signer options and alternative deposits</li>
               <li>Budgeting and credit-building plan for approval odds</li>
             </ul>
-            <p class="disclaimer">Reporting availability varies by landlord and bureau. We’ll set up the best option for your situation.</p>
+            <p class="disclaimer">Reporting availability varies by landlord and bureau. We'll set up the best option for your situation.</p>
+            <iframe src="https://forms.gle/frzpkXEXy6QLHP7X6" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="No Rental History Form">Loading…</iframe>
           </div>
         </div>
       </div>
@@ -298,7 +349,7 @@
             <div class="num">1</div>
             <div>
               <strong>Free 15‑minute eligibility check</strong>
-              <p class="muted">We review your goals, state rules, and timeline. If we can’t help, we’ll tell you immediately.</p>
+              <p class="muted">We review your goals, state rules, and timeline. If we can't help, we'll tell you immediately.</p>
             </div>
           </div>
           <div class="step card">
@@ -322,6 +373,9 @@
               <p class="muted">We monitor responses, verify changes, and package your approvals kit for landlords.</p>
             </div>
           </div>
+        </div>
+        <div class="cta" style="margin-top: 24px; justify-content: center;">
+            <a class="btn" href="#consult">Book Your Free Consultation</a>
         </div>
       </div>
     </section>
@@ -407,7 +461,7 @@
             <ul>
               <li>Sample letters and evidence checklist</li>
               <li>Where to send disputes and how to track responses</li>
-              <li>Escalation if errors aren’t fixed</li>
+              <li>Escalation if errors aren't fixed</li>
             </ul>
             <a href="#" aria-disabled="true">Download (ZIP) →</a>
           </div>
@@ -423,7 +477,7 @@
             <details>
               <summary>Can you remove a felony conviction from my record?</summary>
               <div>
-                <p>We don’t “erase” convictions. Many states offer legal relief such as expungement, sealing, certificates of rehabilitation, or pardons—each with specific eligibility rules and timelines. We screen your eligibility and, if appropriate, connect you with licensed attorneys who handle the legal filings. Outcomes vary and are not guaranteed.</p>
+                <p>We don't "erase" convictions. Many states offer legal relief such as expungement, sealing, certificates of rehabilitation, or pardons—each with specific eligibility rules and timelines. We screen your eligibility and, if appropriate, connect you with licensed attorneys who handle the legal filings. Outcomes vary and are not guaranteed.</p>
               </div>
             </details>
             <details>
@@ -435,7 +489,7 @@
             <details>
               <summary>How does rent reporting work if I have no rental history?</summary>
               <div>
-                <p>We help set up reporting of your on-time rent to major credit bureaus (where eligible). We can also add past rent history with documentation. Not all landlords or bureaus accept all programs; we’ll set up the best fit and pair it with a rental résumé and reference kit.</p>
+                <p>We help set up reporting of your on-time rent to major credit bureaus (where eligible). We can also add past rent history with documentation. Not all landlords or bureaus accept all programs; we'll set up the best fit and pair it with a rental résumé and reference kit.</p>
               </div>
             </details>
             <details>
@@ -453,7 +507,7 @@
             <details>
               <summary>Do you offer refunds?</summary>
               <div>
-                <p>You may cancel within three business days of signing any paid agreement for a full refund. After work begins, refunds depend on work completed to date. We’ll outline this clearly in writing.</p>
+                <p>You may cancel within three business days of signing any paid agreement for a full refund. After work begins, refunds depend on work completed to date. We'll outline this clearly in writing.</p>
               </div>
             </details>
           </div>
@@ -479,81 +533,10 @@
     <section id="consult" class="section">
       <div class="container">
         <h2>Book your free eligibility check</h2>
-        <div class="grid cols-2">
-          <div class="card" style="padding:16px">
-            <form id="consult-form" action="https://example.com/submit" method="post">
-              <div class="row">
-                <div>
-                  <label for="cname">Full name</label>
-                  <input id="cname" name="name" required />
-                </div>
-                <div>
-                  <label for="cphone">Phone</label>
-                  <input id="cphone" name="phone" inputmode="tel" placeholder="(505) 595-7861" />
-                </div>
-              </div>
-              <div class="row" style="margin-top:10px">
-                <div>
-                  <label for="cemail">Email</label>
-                  <input id="cemail" type="email" name="email" required />
-                </div>
-                <div>
-                  <label for="cstate">State</label>
-                  <select id="cstate" name="state" required>
-                    <option value="">Choose…</option>
-                    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
-                    <option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option>
-                    <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
-                    <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
-                    <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
-                    <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
-                    <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
-                    <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
-                    <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
-                    <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
-                    <option>WY</option>
-                  </select>
-                </div>
-              </div>
-              <div style="margin-top:10px">
-                <label for="cservice">I’m most interested in</label>
-                <select id="cservice" name="service" required>
-                  <option value="">Choose…</option>
-                  <option>Eviction record solutions</option>
-                  <option>Record relief (expungement/sealing)</option>
-                  <option>No rental history support</option>
-                  <option>Credit clean-up & coaching</option>
-                </select>
-              </div>
-              <div style="margin-top:10px">
-                <label for="cnotes">Brief notes</label>
-                <textarea id="cnotes" name="notes" rows="4" placeholder="Share dates, case types, and goals."></textarea>
-              </div>
-              <div style="margin-top:10px">
-                <label><input type="checkbox" required /> I consent to be contacted and agree to the Terms & Privacy.</label>
-              </div>
-              <div style="margin-top:12px">
-                <button class="btn" type="submit">Request my free consult</button>
-              </div>
-              <p class="disclaimer" style="margin-top:8px">We respond within 1 business day.</p>
-            </form>
-          </div>
-          <div class="card" style="padding:16px">
-            <h3>What to bring</h3>
-            <ul>
-              <li>Recent credit report and tenant screening report (if available)</li>
-              <li>Court case numbers or docket printouts</li>
-              <li>Proof of payment/satisfaction or dismissals</li>
-              <li>Government ID</li>
-            </ul>
-            <h3>Typical timelines</h3>
-            <ul>
-              <li>Credit/screening disputes: 30–45 days per round</li>
-              <li>Record relief filings: 3–12 months</li>
-              <li>Rent reporting activation: 1–2 weeks</li>
-            </ul>
-            <p class="disclaimer">Timelines are estimates and vary by court, agency, and state law.</p>
-          </div>
+        <div class="card" style="padding: 20px;">
+            <p style="text-align: center; margin-bottom: 20px;">Select a date and time that works for you. We offer consultations Monday - Friday, 7:00 AM to 4:30 PM.</p>
+            <!-- Updated Zoho Booking Embed -->
+            <iframe width='100%' height='750px' src='https://powerplayresourcecenter.zohobookings.com/portal-embed#/4769724000000052002' frameborder='0' allowfullscreen='' ></iframe>
         </div>
       </div>
     </section>
@@ -566,7 +549,7 @@
             <h3>Terms of Service</h3>
             <p class="muted">Summary of key points:</p>
             <ul>
-              <li>Services are provided “as-is”; no outcome is guaranteed.</li>
+              <li>Services are provided "as-is"; no outcome is guaranteed.</li>
               <li>We work only on inaccurate, incomplete, outdated, or unverifiable items.</li>
               <li>Legal services are provided by independent attorneys under separate agreements.</li>
               <li>Billing, cancellations, and refunds will be clearly disclosed before any charge.</li>
@@ -601,16 +584,14 @@
           <ul style="list-style:none; padding:0; margin:8px 0 0">
             <li>Email: <a href="mailto:support@powerplayrc.com">support@powerplayrc.com</a></li>
             <li>Phone: <a href="tel:+15055957861">(505) 595-7861</a></li>
-            <li>Hours: Mon–Fri, 9am–6pm</li>
+            <li>Hours: Mon–Fri, 7am–4:30pm</li>
           </ul>
         </div>
         <div>
-          <strong>Links</strong>
+          <strong>Connect</strong>
           <ul style="list-style:none; padding:0; margin:8px 0 0">
-            <li><a href="#services">Services</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#terms">Terms</a> · <a href="#privacy">Privacy</a></li>
+            <li><a href="https://www.instagram.com/power_playrc/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61582673139217" target="_blank" rel="noopener noreferrer">Facebook</a></li>
           </ul>
         </div>
       </div>
@@ -626,13 +607,13 @@
       e.preventDefault();
       const state = document.getElementById('state').value;
       const focus = document.getElementById('focus').value;
-      let msg = "Thanks! We’ll email you your state-specific next steps.";
+      let msg = "Thanks! We'll email you your state-specific next steps.";
       if(focus.includes('Record relief')){
-        msg = "Record relief options vary by state and offense. We’ll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
+        msg = "Record relief options vary by state and offense. We'll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
       } else if(focus.includes('Eviction')){
-        msg = "We’ll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
+        msg = "We'll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
       } else if(focus.includes('Build rental')){
-        msg = "We’ll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
+        msg = "We'll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
       }
       result.textContent = msg;
       result.style.display = 'block';
@@ -654,7 +635,1945 @@
       "addressRegion":"NM",
       "addressCountry":"US"
     },
-    "sameAs": [],
+    "sameAs": [
+      "https://www.instagram.com/power_playrc/",
+      "https://www.facebook.com/profile.php?id=61582673139217"
+    ],
+    "description":"Ethical help for eviction records, record relief, and rental history building. Based in Albuquerque, New Mexico."
+  }
+  </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POWER PLAY Resource Center | Evictions • Record Relief • Rental History</title>
+  <meta name="description" content="POWER PLAY Resource Center in Albuquerque, New Mexico helps correct credit and screening errors, address eviction records, explore expungement and record sealing eligibility, and build rental history with rent reporting and application coaching." />
+  <meta name="theme-color" content="#0e6efb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --brand:#0e6efb;
+      --brand-dark:#0b53bc;
+      --ink:#0e1726;
+      --muted:#5b6473;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --ok:#0bb07b;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ring: 0 0 0 4px rgba(14,110,251,.15);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0; scroll-behavior: smooth;}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--ink); background:var(--bg); line-height:1.5;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{color:var(--brand-dark); text-decoration:underline}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .topbar{
+      background:#0b1530; color:#cad2e2; font-size:14px;
+      padding:8px 0;
+    }
+    .topbar .row{display:flex; align-items:center; justify-content:space-between}
+    .topbar a{color:#e6edff; text-decoration:none}
+    header{
+      background:var(--card);
+      position:sticky; top:0; z-index:40; border-bottom:1px solid #e9eef6;
+    }
+    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px}
+    .logo-badge{
+      width:34px; height:34px; border-radius:8px; background:linear-gradient(140deg, var(--brand), #56b1ff);
+      display:grid; place-items:center; color:white; font-weight:900; letter-spacing:-.5px;
+      box-shadow:0 10px 20px rgba(14,110,251,.25);
+    }
+    .nav-links{display:flex; gap:20px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--brand); color:white; border:none; border-radius:12px; padding:12px 18px; font-weight:700; cursor:pointer;
+      box-shadow:0 8px 18px rgba(14,110,251,.25);
+    }
+    .btn:hover{background:var(--brand-dark)}
+    .btn.outline{background:transparent; color:var(--brand); border:2px solid var(--brand); box-shadow:none}
+    .hero{
+      padding:40px 0 24px; background:
+        radial-gradient(1200px 400px at 50% -200px, rgba(14,110,251,.08), transparent),
+        linear-gradient(#ffffff, #f7f9fc 40%);
+      border-bottom:1px solid #e9eef6;
+    }
+    .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:26px; align-items:center}
+    .h1{
+      font-size:40px; line-height:1.15; margin:6px 0 14px; letter-spacing:-.5px; font-weight:800;
+    }
+    .sub{color:var(--muted); font-size:18px; margin-bottom:18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 20px}
+    .pill{
+      background:#eef4ff; color:#1945a5; padding:6px 10px; border-radius:999px; font-weight:600; font-size:13px;
+      border:1px solid #dbe7ff;
+    }
+    .card{
+      background:var(--card); border:1px solid #e9eef6; border-radius:var(--radius);
+      box-shadow:0 12px 30px rgba(10,32,66,.06);
+    }
+    .hero-card{padding:16px}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px}
+    .kpi{background:#f5f8ff; border:1px dashed #cfe0ff; border-radius:12px; padding:10px; text-align:center}
+    .kpi strong{font-size:18px}
+    .section{padding:38px 0}
+    .section h2{font-size:28px; margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:16px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    .service{padding:18px}
+    .service h3{margin:0 0 6px}
+    .service iframe {
+        margin-top: 16px;
+        border-radius: 8px;
+        border: 1px solid #e9eef6;
+    }
+    ul{padding-left:18px; margin:8px 0}
+    .steps{counter-reset:step}
+    .step{
+      padding:16px; display:flex; gap:12px; align-items:flex-start; border-left:4px solid #dbe7ff; border-radius:10px; background:#fff
+    }
+    .step .num{
+      width:28px; height:28px; border-radius:50%; background:#eef4ff; color:#1945a5; display:grid; place-items:center; font-weight:700
+    }
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px
+    }
+    .notice{
+      background:#fff6e6; color:#7a4b00; border:1px solid #ffd9a8; border-radius:12px; padding:12px; font-size:14px
+    }
+    .legal{
+      background:#f4f6fb; border:1px solid #e1e6f0; padding:14px; border-radius:12px; font-size:14px; color:#374151
+    }
+    .faq details{background:#fff; border:1px solid #e9eef6; border-radius:12px; padding:12px}
+    .faq summary{cursor:pointer; font-weight:600}
+    .tag{font-size:12px; font-weight:700; color:#1945a5; background:#eef4ff; border:1px solid #dbe7ff; padding:3px 6px; border-radius:999px}
+    .cards{display:grid; gap:12px}
+    .plan{padding:16px}
+    .price{font-size:26px; font-weight:800}
+    .footer{padding:26px 0; color:#6b7280}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    input,select,textarea{
+      width:100%; padding:12px; border-radius:10px; border:1px solid #cdd7e5; font:inherit; background:white
+    }
+    input:focus,select:focus,textarea:focus{outline:none; box-shadow:var(--ring); border-color:var(--brand)}
+    label{font-weight:600; font-size:14px}
+    form .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .disclaimer{font-size:12px; color:#6b7280}
+    .trust{display:flex; gap:16px; align-items:center; flex-wrap:wrap; color:#6b7280; font-size:14px}
+    .trust .dot{width:8px; height:8px; background:#cfe0ff; border-radius:999px}
+    .mobile-nav{display:none}
+    /* About Us Page Styles */
+    .about-header { background: var(--brand); color: white; padding: 40px 0; text-align: center; }
+    .about-header h1 { margin: 0; font-size: 2.5rem; }
+    .about-header p { font-size: 1.1rem; opacity: 0.9; }
+    .about-content { background: white; margin-top: -30px; border-radius: var(--radius); padding: 40px; box-shadow: 0 8px 32px rgba(14,110,251,0.07); }
+    .about-content h2 { color: var(--brand); border-bottom: 2px solid #e9eef6; padding-bottom: 10px; margin-top: 30px;}
+    .about-content h2:first-child { margin-top: 0; }
+    .about-content ul { list-style-type: none; padding-left: 0; }
+    .about-content ul li { background: #f7f9fc; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--brand); }
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .cols-3{grid-template-columns:1fr}
+      .cols-2{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .mobile-nav{display:block}
+      /* Adjust footer for smaller screens to stack cols */
+      .footer .grid { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+      .footer .logo { justify-content: center; }
+      .footer ul { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container row">
+      <div>☎ Free Eligibility Check: <a href="tel:+15055957861" aria-label="Call now">(505) 595-7861</a></div>
+      <div><a href="#consult">Book a consult</a> · <a href="#faq">FAQ</a></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true">PP</div>
+          <span>POWER PLAY Resource Center</span>
+        </div>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#about">About Us</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="mobile-nav">
+          <a class="btn outline" href="#consult">Free consult</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badges">
+            <span class="pill">Housing-focused credit help</span>
+            <span class="pill">Legal & ethical approach</span>
+            <span class="pill">Based in Albuquerque, NM</span>
+          </div>
+          <h1 class="h1">A second chance for housing and credit</h1>
+          <p class="sub">We help you address eviction records, explore record relief for convictions (expungement/sealing eligibility), and build rental history—so you can qualify for better housing with confidence.</p>
+          <div class="cta">
+            <a class="btn" href="#consult">Get my free eligibility check</a>
+            <a class="btn outline" href="#services">See how we help</a>
+          </div>
+          <div style="margin-top:10px" class="trust">
+            <span class="dot"></span> No high-pressure sales
+            <span class="dot"></span> Transparent pricing
+            <span class="dot"></span> Results not guaranteed—always honest about odds
+          </div>
+        </div>
+        <div>
+          <div class="card hero-card" aria-labelledby="quick-check">
+            <h2 id="quick-check">Quick pre-check</h2>
+            <p class="muted" style="margin-top:-6px">Tell us where you live and what you need. We'll flag likely options in 1 minute.</p>
+            <form id="precheck">
+              <div class="row">
+                <div>
+                  <label for="name">Full name</label>
+                  <input id="name" name="name" placeholder="First Last" required />
+                </div>
+                <div>
+                  <label for="state">State</label>
+                  <select id="state" name="state" required>
+                    <option value="">Choose…</option>
+                    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                    <option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option>
+                    <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                    <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                    <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                    <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                    <option>NJ</option><option>NM selected</option><option>NY</option><option>NC</option><option>ND</option>
+                    <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                    <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                    <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
+                    <option>WY</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" style="margin-top:10px">
+                <div>
+                  <label for="focus">Main goal</label>
+                  <select id="focus" name="focus" required>
+                    <option value="">Choose…</option>
+                    <option>Fix eviction records</option>
+                    <option>Record relief for felony/conviction</option>
+                    <option>Build rental history (no history)</option>
+                    <option>General credit clean-up</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div style="margin-top:10px">
+                <label for="notes">Anything else we should know? <span class="muted">(optional)</span></label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Example: eviction in 2021, case paid; misdemeanor from 2017; no rental history."></textarea>
+              </div>
+              <div style="margin-top:10px">
+                <button class="btn" type="submit">Check my options</button>
+              </div>
+              <p class="disclaimer" style="margin-top:8px">By submitting, you agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>. We won't spam you.</p>
+            </form>
+            <div id="precheck-result" class="notice" style="display:none; margin-top:12px" role="status" aria-live="polite"></div>
+            <div class="kpis" aria-label="Quick facts">
+              <div class="kpi"><strong>50+</strong><div class="muted">State-by-state guides</div></div>
+              <div class="kpi"><strong>3–6 mo</strong><div class="muted">Typical record-relief timeline</div></div>
+              <div class="kpi"><strong>72h</strong><div class="muted">No-risk cancellation</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background:var(--bg); padding-top: 0;">
+      <div class="container about-content">
+        <h2>Our Mission</h2>
+        <p class="mission">
+          At POWER PLAY Resource Center, we believe that everyone deserves a safe, stable place to call home—no matter their past or where they're starting from. Our passion is helping people who have made mistakes, faced setbacks, or are just getting started on their own, to have a real opportunity to obtain suitable housing and build a brighter future.
+        </p>
+        <h2>Why We Do This Work</h2>
+        <p>
+          We know that a single eviction, a past conviction, or a lack of rental history can close doors for good people. We've seen firsthand how hard it can be to move forward when the system keeps reminding you of your past. That's why we're here: to help you clear obstacles, understand your rights, and present your best self to landlords and lenders.
+        </p>
+        <ul>
+          <li><strong>Second Chances:</strong> We believe in redemption and new beginnings for everyone.</li>
+          <li><strong>Respect & Dignity:</strong> We treat every client with compassion, confidentiality, and respect.</li>
+          <li><strong>Empowerment:</strong> We give you the tools, knowledge, and support to advocate for yourself.</li>
+          <li><strong>Integrity:</strong> We are honest about what's possible and never make false promises.</li>
+          <li><strong>Community:</strong> We're proud to serve Albuquerque and the greater New Mexico community.</li>
+        </ul>
+        <h2>Who We Help</h2>
+        <p>
+          Whether you're rebuilding after a mistake, aging out of foster care, starting over after a tough time, or just need a fair shot at your first apartment, we're here for you. Our team works with people from all walks of life—because everyone deserves a place to call home.
+        </p>
+        <h2>Meet Our Team</h2>
+        <p>
+          POWER PLAY Resource Center is made up of dedicated advocates, housing specialists, and credit experts who care deeply about your success. We bring years of experience in housing, credit, and community support, and we're committed to walking with you every step of the way.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>What we specialize in</h2>
+        <p class="muted">We work within the law to help correct inaccuracies, pursue eligible record relief, and build a rental profile landlords trust.</p>
+        <div class="grid cols-3">
+          <div class="card service">
+            <span class="tag">Eviction record solutions</span>
+            <h3>Address eviction history the right way</h3>
+            <ul>
+              <li>Dispute inaccurate, outdated, or unverifiable screening data</li>
+              <li>Update tenant screening and credit files after judgments are satisfied</li>
+              <li>Explore court record sealing/expungement where your state allows</li>
+              <li>Landlord reference strategy + application coaching</li>
+            </ul>
+            <p class="disclaimer">We don't remove accurate, verifiable public records. We help fix errors and pursue lawful remedies.</p>
+            <iframe src="https://forms.gle/vFGRDucVWqBJvwr1A" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Eviction Report Removal Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">Record relief (expungement/sealing)</span>
+            <h3>Second-chance pathways for convictions</h3>
+            <ul>
+              <li>Eligibility screening by jurisdiction and offense type</li>
+              <li>Referrals to licensed attorneys for legal filings and hearings</li>
+              <li>Certificate of rehabilitation and pardon guidance</li>
+              <li>Post-relief updates to background and screening providers</li>
+            </ul>
+            <p class="disclaimer">We are not a law firm and do not provide legal advice. Legal work is handled by partner attorneys where permitted.</p>
+            <iframe src="https://forms.gle/KDnrT4XWq7DZsmHJ8" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Conviction Relief Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">No rental history support</span>
+            <h3>Build a rental profile from zero</h3>
+            <ul>
+              <li>Rent reporting to major credit bureaus (current and past rent)</li>
+              <li>Rental résumé + Letter of Explanation + reference kit</li>
+              <li>Guarantor/co-signer options and alternative deposits</li>
+              <li>Budgeting and credit-building plan for approval odds</li>
+            </ul>
+            <p class="disclaimer">Reporting availability varies by landlord and bureau. We'll set up the best option for your situation.</p>
+            <iframe src="https://forms.gle/frzpkXEXy6QLHP7X6" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="No Rental History Form">Loading…</iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="grid steps">
+          <div class="step card">
+            <div class="num">1</div>
+            <div>
+              <strong>Free 15‑minute eligibility check</strong>
+              <p class="muted">We review your goals, state rules, and timeline. If we can't help, we'll tell you immediately.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">2</div>
+            <div>
+              <strong>Collect documents</strong>
+              <p class="muted">Credit/tenant screening reports, court dockets, proof of payment, and IDs. We draft disputes or refer to counsel if legal filings are needed.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">3</div>
+            <div>
+              <strong>Action plan</strong>
+              <p class="muted">Dispute inaccurate items, pursue record relief where eligible, and set up rent reporting + a rental résumé to improve your applications.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">4</div>
+            <div>
+              <strong>Updates and verification</strong>
+              <p class="muted">We monitor responses, verify changes, and package your approvals kit for landlords.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cta" style="margin-top: 24px; justify-content: center;">
+            <a class="btn" href="#consult">Book Your Free Consultation</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2>Simple, transparent pricing</h2>
+        <div class="grid cols-3 cards">
+          <div class="card plan">
+            <span class="tag">Start here</span>
+            <h3>Free consult</h3>
+            <p class="muted">15 minutes · Honest assessment</p>
+            <p class="price">$0</p>
+            <ul>
+              <li>State-specific eligibility snapshot</li>
+              <li>Timeline & odds discussion</li>
+              <li>No obligation</li>
+            </ul>
+            <a class="btn" href="#consult">Book now</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Most popular</span>
+            <h3>Rental Readiness Pack</h3>
+            <p class="muted">For no/limited rental history</p>
+            <p class="price">$199</p>
+            <ul>
+              <li>Rent reporting setup (where eligible)</li>
+              <li>Rental résumé + references + LOE</li>
+              <li>Landlord application coaching</li>
+            </ul>
+            <a class="btn" href="#consult">Get started</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Hands-on help</span>
+            <h3>Record & Eviction Support</h3>
+            <p class="muted">Custom plan · varies by case</p>
+            <p class="price">From $79/mo</p>
+            <ul>
+              <li>FCRA disputes for inaccuracies</li>
+              <li>Attorney referrals for expungement/sealing</li>
+              <li>Screening provider updates & verification</li>
+            </ul>
+            <a class="btn" href="#consult">See options</a>
+          </div>
+        </div>
+        <p class="disclaimer" style="margin-top:10px">You may cancel within 3 business days of signing any paid agreement. You can dispute credit report errors on your own at no cost—ask us for a free DIY guide.</p>
+      </div>
+    </section>
+
+    <section id="resources" class="section">
+      <div class="container">
+        <h2>Guides & resources</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Evictions and tenant screening: what landlords see</h3>
+            <ul>
+              <li>How eviction filings and judgments flow to screening companies</li>
+              <li>Disputing inaccurate or outdated records under the FCRA</li>
+              <li>State sealing/expungement basics</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>Record relief 101: expungement vs. sealing vs. pardons</h3>
+            <ul>
+              <li>Eligibility factors and typical timelines</li>
+              <li>How relief affects background checks</li>
+              <li>Working with licensed attorneys</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>No rental history? Build your profile fast</h3>
+            <ul>
+              <li>Rent reporting and alternative data</li>
+              <li>Rental résumé + letters that work</li>
+              <li>Co-signer/guarantor and deposit options</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>DIY dispute toolkit</h3>
+            <ul>
+              <li>Sample letters and evidence checklist</li>
+              <li>Where to send disputes and how to track responses</li>
+              <li>Escalation if errors aren't fixed</li>
+            </ul>
+            <a href="#" aria-disabled="true">Download (ZIP) →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <div class="grid">
+          <div class="faq grid" style="gap:10px">
+            <details>
+              <summary>Can you remove a felony conviction from my record?</summary>
+              <div>
+                <p>We don't "erase" convictions. Many states offer legal relief such as expungement, sealing, certificates of rehabilitation, or pardons—each with specific eligibility rules and timelines. We screen your eligibility and, if appropriate, connect you with licensed attorneys who handle the legal filings. Outcomes vary and are not guaranteed.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Can you remove an eviction from my record?</summary>
+              <div>
+                <p>We can dispute inaccurate or outdated tenant screening data and help update records after a case is dismissed or satisfied. Some states allow court record sealing for certain eviction matters. Accurate, verifiable public records generally cannot be removed unless your state provides lawful relief.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How does rent reporting work if I have no rental history?</summary>
+              <div>
+                <p>We help set up reporting of your on-time rent to major credit bureaus (where eligible). We can also add past rent history with documentation. Not all landlords or bureaus accept all programs; we'll set up the best fit and pair it with a rental résumé and reference kit.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Is this legal? Is it credit repair?</summary>
+              <div>
+                <p>Yes—we follow federal and state laws including the Fair Credit Reporting Act (FCRA) and the Credit Repair Organizations Act (CROA). We dispute only inaccurate, incomplete, outdated, or unverifiable information, and we never promise results.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How long does this take?</summary>
+              <div>
+                <p>FCRA disputes are typically 30–45 days per round. Record relief (expungement/sealing) can take 3–12 months depending on your state and case. Rent reporting setup can be as quick as 1–2 weeks.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Do you offer refunds?</summary>
+              <div>
+                <p>You may cancel within three business days of signing any paid agreement for a full refund. After work begins, refunds depend on work completed to date. We'll outline this clearly in writing.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compliance" class="section">
+      <div class="container">
+        <h2>Compliance and consumer protections</h2>
+        <div class="legal">
+          <ul>
+            <li><strong>CROA Disclosure:</strong> You have the right to dispute inaccurate information in your credit report for free by contacting the credit bureaus directly. You are not required to pay for credit repair services.</li>
+            <li><strong>Three-Day Cancellation:</strong> You may cancel any paid agreement with us within three business days.</li>
+            <li><strong>No Legal Advice:</strong> POWER PLAY Resource Center is not a law firm and does not provide legal advice. If legal services are needed, we will refer you to licensed attorneys.</li>
+            <li><strong>No Guarantees:</strong> We do not guarantee outcomes. Timeframes and results vary by case and jurisdiction.</li>
+            <li><strong>Privacy:</strong> We safeguard your data and never sell your information.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="consult" class="section">
+      <div class="container">
+        <h2>Book your free eligibility check</h2>
+        <div class="card" style="padding: 20px;">
+            <p style="text-align: center; margin-bottom: 20px;">Select a date and time that works for you. We offer consultations Monday - Friday, 7:00 AM to 4:30 PM.</p>
+            <!-- Updated Zoho Booking Embed -->
+            <iframe width='100%' height='750px' src='https://powerplayresourcecenter.zohobookings.com/portal-embed#/4769724000000052002' frameborder='0' allowfullscreen='' ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="section">
+      <div class="container">
+        <h2>Terms & Privacy</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Terms of Service</h3>
+            <p class="muted">Summary of key points:</p>
+            <ul>
+              <li>Services are provided "as-is"; no outcome is guaranteed.</li>
+              <li>We work only on inaccurate, incomplete, outdated, or unverifiable items.</li>
+              <li>Legal services are provided by independent attorneys under separate agreements.</li>
+              <li>Billing, cancellations, and refunds will be clearly disclosed before any charge.</li>
+            </ul>
+          </div>
+          <div class="card" id="privacy" style="padding:16px">
+            <h3>Privacy Policy</h3>
+            <ul>
+              <li>We collect only the data needed to serve you.</li>
+              <li>We never sell your personal information.</li>
+              <li>Access is restricted and encrypted at rest and in transit.</li>
+              <li>You may request deletion of your data at any time.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <div class="logo" style="margin-bottom:8px">
+            <div class="logo-badge" aria-hidden="true">PP</div>
+            <span>POWER PLAY</span>
+          </div>
+          <p>Ethical help for eviction records, conviction record relief, and rental history building. Based in Albuquerque, New Mexico.</p>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li>Email: <a href="mailto:support@powerplayrc.com">support@powerplayrc.com</a></li>
+            <li>Phone: <a href="tel:+15055957861">(505) 595-7861</a></li>
+            <li>Hours: Mon–Fri, 7am–4:30pm</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Connect</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li><a href="https://www.instagram.com/power_playrc/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61582673139217" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="disclaimer" style="margin-top:10px">© <span id="year"></span> POWER PLAY Resource Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple pre-check logic for demo
+    const form = document.getElementById('precheck');
+    const result = document.getElementById('precheck-result');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const state = document.getElementById('state').value;
+      const focus = document.getElementById('focus').value;
+      let msg = "Thanks! We'll email you your state-specific next steps.";
+      if(focus.includes('Record relief')){
+        msg = "Record relief options vary by state and offense. We'll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
+      } else if(focus.includes('Eviction')){
+        msg = "We'll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
+      } else if(focus.includes('Build rental')){
+        msg = "We'll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
+      }
+      result.textContent = msg;
+      result.style.display = 'block';
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"POWER PLAY Resource Center",
+    "url":"https://www.powerplay.example",
+    "email":"support@powerplayrc.com",
+    "telephone":"+15055957861",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Albuquerque",
+      "addressRegion":"NM",
+      "addressCountry":"US"
+    },
+    "sameAs": [
+      "https://www.instagram.com/power_playrc/",
+      "https://www.facebook.com/profile.php?id=61582673139217"
+    ],
+    "description":"Ethical help for eviction records, record relief, and rental history building. Based in Albuquerque, New Mexico."
+  }
+  </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POWER PLAY Resource Center | Evictions • Record Relief • Rental History</title>
+  <meta name="description" content="POWER PLAY Resource Center in Albuquerque, New Mexico helps correct credit and screening errors, address eviction records, explore expungement and record sealing eligibility, and build rental history with rent reporting and application coaching." />
+  <meta name="theme-color" content="#0e6efb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --brand:#0e6efb;
+      --brand-dark:#0b53bc;
+      --ink:#0e1726;
+      --muted:#5b6473;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --ok:#0bb07b;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ring: 0 0 0 4px rgba(14,110,251,.15);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0; scroll-behavior: smooth;}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--ink); background:var(--bg); line-height:1.5;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{color:var(--brand-dark); text-decoration:underline}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .topbar{
+      background:#0b1530; color:#cad2e2; font-size:14px;
+      padding:8px 0;
+    }
+    .topbar .row{display:flex; align-items:center; justify-content:space-between}
+    .topbar a{color:#e6edff; text-decoration:none}
+    header{
+      background:var(--card);
+      position:sticky; top:0; z-index:40; border-bottom:1px solid #e9eef6;
+    }
+    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px}
+    .logo-badge{
+      width:34px; height:34px; border-radius:8px; background:linear-gradient(140deg, var(--brand), #56b1ff);
+      display:grid; place-items:center; color:white; font-weight:900; letter-spacing:-.5px;
+      box-shadow:0 10px 20px rgba(14,110,251,.25);
+    }
+    .nav-links{display:flex; gap:20px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--brand); color:white; border:none; border-radius:12px; padding:12px 18px; font-weight:700; cursor:pointer;
+      box-shadow:0 8px 18px rgba(14,110,251,.25);
+    }
+    .btn:hover{background:var(--brand-dark)}
+    .btn.outline{background:transparent; color:var(--brand); border:2px solid var(--brand); box-shadow:none}
+    .hero{
+      padding:40px 0 24px; background:
+        radial-gradient(1200px 400px at 50% -200px, rgba(14,110,251,.08), transparent),
+        linear-gradient(#ffffff, #f7f9fc 40%);
+      border-bottom:1px solid #e9eef6;
+    }
+    .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:26px; align-items:center}
+    .h1{
+      font-size:40px; line-height:1.15; margin:6px 0 14px; letter-spacing:-.5px; font-weight:800;
+    }
+    .sub{color:var(--muted); font-size:18px; margin-bottom:18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 20px}
+    .pill{
+      background:#eef4ff; color:#1945a5; padding:6px 10px; border-radius:999px; font-weight:600; font-size:13px;
+      border:1px solid #dbe7ff;
+    }
+    .card{
+      background:var(--card); border:1px solid #e9eef6; border-radius:var(--radius);
+      box-shadow:0 12px 30px rgba(10,32,66,.06);
+    }
+    .hero-card{padding:16px}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px}
+    .kpi{background:#f5f8ff; border:1px dashed #cfe0ff; border-radius:12px; padding:10px; text-align:center}
+    .kpi strong{font-size:18px}
+    .section{padding:38px 0}
+    .section h2{font-size:28px; margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:16px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    .service{padding:18px}
+    .service h3{margin:0 0 6px}
+    .service iframe {
+        margin-top: 16px;
+        border-radius: 8px;
+        border: 1px solid #e9eef6;
+    }
+    ul{padding-left:18px; margin:8px 0}
+    .steps{counter-reset:step}
+    .step{
+      padding:16px; display:flex; gap:12px; align-items:flex-start; border-left:4px solid #dbe7ff; border-radius:10px; background:#fff
+    }
+    .step .num{
+      width:28px; height:28px; border-radius:50%; background:#eef4ff; color:#1945a5; display:grid; place-items:center; font-weight:700
+    }
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px
+    }
+    .notice{
+      background:#fff6e6; color:#7a4b00; border:1px solid #ffd9a8; border-radius:12px; padding:12px; font-size:14px
+    }
+    .legal{
+      background:#f4f6fb; border:1px solid #e1e6f0; padding:14px; border-radius:12px; font-size:14px; color:#374151
+    }
+    .faq details{background:#fff; border:1px solid #e9eef6; border-radius:12px; padding:12px}
+    .faq summary{cursor:pointer; font-weight:600}
+    .tag{font-size:12px; font-weight:700; color:#1945a5; background:#eef4ff; border:1px solid #dbe7ff; padding:3px 6px; border-radius:999px}
+    .cards{display:grid; gap:12px}
+    .plan{padding:16px}
+    .price{font-size:26px; font-weight:800}
+    .footer{padding:26px 0; color:#6b7280}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    input,select,textarea{
+      width:100%; padding:12px; border-radius:10px; border:1px solid #cdd7e5; font:inherit; background:white
+    }
+    input:focus,select:focus,textarea:focus{outline:none; box-shadow:var(--ring); border-color:var(--brand)}
+    label{font-weight:600; font-size:14px}
+    form .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .disclaimer{font-size:12px; color:#6b7280}
+    .trust{display:flex; gap:16px; align-items:center; flex-wrap:wrap; color:#6b7280; font-size:14px}
+    .trust .dot{width:8px; height:8px; background:#cfe0ff; border-radius:999px}
+    .mobile-nav{display:none}
+    /* About Us Page Styles */
+    .about-header { background: var(--brand); color: white; padding: 40px 0; text-align: center; }
+    .about-header h1 { margin: 0; font-size: 2.5rem; }
+    .about-header p { font-size: 1.1rem; opacity: 0.9; }
+    .about-content { background: white; margin-top: -30px; border-radius: var(--radius); padding: 40px; box-shadow: 0 8px 32px rgba(14,110,251,0.07); }
+    .about-content h2 { color: var(--brand); border-bottom: 2px solid #e9eef6; padding-bottom: 10px; margin-top: 30px;}
+    .about-content h2:first-child { margin-top: 0; }
+    .about-content ul { list-style-type: none; padding-left: 0; }
+    .about-content ul li { background: #f7f9fc; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--brand); }
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .cols-3{grid-template-columns:1fr}
+      .cols-2{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .mobile-nav{display:block}
+      /* Adjust footer for smaller screens to stack cols */
+      .footer .grid { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+      .footer .logo { justify-content: center; }
+      .footer ul { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container row">
+      <div>☎ Free Eligibility Check: <a href="tel:+15055957861" aria-label="Call now">(505) 595-7861</a></div>
+      <div><a href="#consult">Book a consult</a> · <a href="#faq">FAQ</a></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true">PP</div>
+          <span>POWER PLAY Resource Center</span>
+        </div>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#about">About Us</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="mobile-nav">
+          <a class="btn outline" href="#consult">Free consult</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badges">
+            <span class="pill">Housing-focused credit help</span>
+            <span class="pill">Legal & ethical approach</span>
+            <span class="pill">Based in Albuquerque, NM</span>
+          </div>
+          <h1 class="h1">A second chance for housing and credit</h1>
+          <p class="sub">We help you address eviction records, explore record relief for convictions (expungement/sealing eligibility), and build rental history—so you can qualify for better housing with confidence.</p>
+          <div class="cta">
+            <a class="btn" href="#consult">Get my free eligibility check</a>
+            <a class="btn outline" href="#services">See how we help</a>
+          </div>
+          <div style="margin-top:10px" class="trust">
+            <span class="dot"></span> No high-pressure sales
+            <span class="dot"></span> Transparent pricing
+            <span class="dot"></span> Results not guaranteed—always honest about odds
+          </div>
+        </div>
+        <div>
+          <div class="card hero-card" aria-labelledby="quick-check">
+            <h2 id="quick-check">Quick pre-check</h2>
+            <p class="muted" style="margin-top:-6px">Tell us where you live and what you need. We'll flag likely options in 1 minute.</p>
+            <form id="precheck">
+              <div class="row">
+                <div>
+                  <label for="name">Full name</label>
+                  <input id="name" name="name" placeholder="First Last" required />
+                </div>
+                <div>
+                  <label for="state">State</label>
+                  <select id="state" name="state" required>
+                    <option value="">Choose…</option>
+                    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                    <option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option>
+                    <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                    <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                    <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                    <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                    <option>NJ</option><option>NM selected</option><option>NY</option><option>NC</option><option>ND</option>
+                    <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                    <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                    <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
+                    <option>WY</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" style="margin-top:10px">
+                <div>
+                  <label for="focus">Main goal</label>
+                  <select id="focus" name="focus" required>
+                    <option value="">Choose…</option>
+                    <option>Fix eviction records</option>
+                    <option>Record relief for felony/conviction</option>
+                    <option>Build rental history (no history)</option>
+                    <option>General credit clean-up</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div style="margin-top:10px">
+                <label for="notes">Anything else we should know? <span class="muted">(optional)</span></label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Example: eviction in 2021, case paid; misdemeanor from 2017; no rental history."></textarea>
+              </div>
+              <div style="margin-top:10px">
+                <button class="btn" type="submit">Check my options</button>
+              </div>
+              <p class="disclaimer" style="margin-top:8px">By submitting, you agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>. We won't spam you.</p>
+            </form>
+            <div id="precheck-result" class="notice" style="display:none; margin-top:12px" role="status" aria-live="polite"></div>
+            <div class="kpis" aria-label="Quick facts">
+              <div class="kpi"><strong>50+</strong><div class="muted">State-by-state guides</div></div>
+              <div class="kpi"><strong>3–6 mo</strong><div class="muted">Typical record-relief timeline</div></div>
+              <div class="kpi"><strong>72h</strong><div class="muted">No-risk cancellation</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background:var(--bg); padding-top: 0;">
+      <div class="container about-content">
+        <h2>Our Mission</h2>
+        <p class="mission">
+          At POWER PLAY Resource Center, we believe that everyone deserves a safe, stable place to call home—no matter their past or where they're starting from. Our passion is helping people who have made mistakes, faced setbacks, or are just getting started on their own, to have a real opportunity to obtain suitable housing and build a brighter future.
+        </p>
+        <h2>Why We Do This Work</h2>
+        <p>
+          We know that a single eviction, a past conviction, or a lack of rental history can close doors for good people. We've seen firsthand how hard it can be to move forward when the system keeps reminding you of your past. That's why we're here: to help you clear obstacles, understand your rights, and present your best self to landlords and lenders.
+        </p>
+        <ul>
+          <li><strong>Second Chances:</strong> We believe in redemption and new beginnings for everyone.</li>
+          <li><strong>Respect & Dignity:</strong> We treat every client with compassion, confidentiality, and respect.</li>
+          <li><strong>Empowerment:</strong> We give you the tools, knowledge, and support to advocate for yourself.</li>
+          <li><strong>Integrity:</strong> We are honest about what's possible and never make false promises.</li>
+          <li><strong>Community:</strong> We're proud to serve Albuquerque and the greater New Mexico community.</li>
+        </ul>
+        <h2>Who We Help</h2>
+        <p>
+          Whether you're rebuilding after a mistake, aging out of foster care, starting over after a tough time, or just need a fair shot at your first apartment, we're here for you. Our team works with people from all walks of life—because everyone deserves a place to call home.
+        </p>
+        <h2>Meet Our Team</h2>
+        <p>
+          POWER PLAY Resource Center is made up of dedicated advocates, housing specialists, and credit experts who care deeply about your success. We bring years of experience in housing, credit, and community support, and we're committed to walking with you every step of the way.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>What we specialize in</h2>
+        <p class="muted">We work within the law to help correct inaccuracies, pursue eligible record relief, and build a rental profile landlords trust.</p>
+        <div class="grid cols-3">
+          <div class="card service">
+            <span class="tag">Eviction record solutions</span>
+            <h3>Address eviction history the right way</h3>
+            <ul>
+              <li>Dispute inaccurate, outdated, or unverifiable screening data</li>
+              <li>Update tenant screening and credit files after judgments are satisfied</li>
+              <li>Explore court record sealing/expungement where your state allows</li>
+              <li>Landlord reference strategy + application coaching</li>
+            </ul>
+            <p class="disclaimer">We don't remove accurate, verifiable public records. We help fix errors and pursue lawful remedies.</p>
+            <iframe src="https://forms.gle/vFGRDucVWqBJvwr1A" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Eviction Report Removal Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">Record relief (expungement/sealing)</span>
+            <h3>Second-chance pathways for convictions</h3>
+            <ul>
+              <li>Eligibility screening by jurisdiction and offense type</li>
+              <li>Referrals to licensed attorneys for legal filings and hearings</li>
+              <li>Certificate of rehabilitation and pardon guidance</li>
+              <li>Post-relief updates to background and screening providers</li>
+            </ul>
+            <p class="disclaimer">We are not a law firm and do not provide legal advice. Legal work is handled by partner attorneys where permitted.</p>
+            <iframe src="https://forms.gle/KDnrT4XWq7DZsmHJ8" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Conviction Relief Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">No rental history support</span>
+            <h3>Build a rental profile from zero</h3>
+            <ul>
+              <li>Rent reporting to major credit bureaus (current and past rent)</li>
+              <li>Rental résumé + Letter of Explanation + reference kit</li>
+              <li>Guarantor/co-signer options and alternative deposits</li>
+              <li>Budgeting and credit-building plan for approval odds</li>
+            </ul>
+            <p class="disclaimer">Reporting availability varies by landlord and bureau. We'll set up the best option for your situation.</p>
+            <iframe src="https://forms.gle/frzpkXEXy6QLHP7X6" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="No Rental History Form">Loading…</iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="grid steps">
+          <div class="step card">
+            <div class="num">1</div>
+            <div>
+              <strong>Free 15‑minute eligibility check</strong>
+              <p class="muted">We review your goals, state rules, and timeline. If we can't help, we'll tell you immediately.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">2</div>
+            <div>
+              <strong>Collect documents</strong>
+              <p class="muted">Credit/tenant screening reports, court dockets, proof of payment, and IDs. We draft disputes or refer to counsel if legal filings are needed.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">3</div>
+            <div>
+              <strong>Action plan</strong>
+              <p class="muted">Dispute inaccurate items, pursue record relief where eligible, and set up rent reporting + a rental résumé to improve your applications.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">4</div>
+            <div>
+              <strong>Updates and verification</strong>
+              <p class="muted">We monitor responses, verify changes, and package your approvals kit for landlords.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cta" style="margin-top: 24px; justify-content: center;">
+            <a class="btn" href="#consult">Book Your Free Consultation</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2>Simple, transparent pricing</h2>
+        <div class="grid cols-3 cards">
+          <div class="card plan">
+            <span class="tag">Start here</span>
+            <h3>Free consult</h3>
+            <p class="muted">15 minutes · Honest assessment</p>
+            <p class="price">$0</p>
+            <ul>
+              <li>State-specific eligibility snapshot</li>
+              <li>Timeline & odds discussion</li>
+              <li>No obligation</li>
+            </ul>
+            <a class="btn" href="#consult">Book now</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Most popular</span>
+            <h3>Rental Readiness Pack</h3>
+            <p class="muted">For no/limited rental history</p>
+            <p class="price">$199</p>
+            <ul>
+              <li>Rent reporting setup (where eligible)</li>
+              <li>Rental résumé + references + LOE</li>
+              <li>Landlord application coaching</li>
+            </ul>
+            <a class="btn" href="#consult">Get started</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Hands-on help</span>
+            <h3>Record & Eviction Support</h3>
+            <p class="muted">Custom plan · varies by case</p>
+            <p class="price">From $79/mo</p>
+            <ul>
+              <li>FCRA disputes for inaccuracies</li>
+              <li>Attorney referrals for expungement/sealing</li>
+              <li>Screening provider updates & verification</li>
+            </ul>
+            <a class="btn" href="#consult">See options</a>
+          </div>
+        </div>
+        <p class="disclaimer" style="margin-top:10px">You may cancel within 3 business days of signing any paid agreement. You can dispute credit report errors on your own at no cost—ask us for a free DIY guide.</p>
+      </div>
+    </section>
+
+    <section id="resources" class="section">
+      <div class="container">
+        <h2>Guides & resources</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Evictions and tenant screening: what landlords see</h3>
+            <ul>
+              <li>How eviction filings and judgments flow to screening companies</li>
+              <li>Disputing inaccurate or outdated records under the FCRA</li>
+              <li>State sealing/expungement basics</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>Record relief 101: expungement vs. sealing vs. pardons</h3>
+            <ul>
+              <li>Eligibility factors and typical timelines</li>
+              <li>How relief affects background checks</li>
+              <li>Working with licensed attorneys</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>No rental history? Build your profile fast</h3>
+            <ul>
+              <li>Rent reporting and alternative data</li>
+              <li>Rental résumé + letters that work</li>
+              <li>Co-signer/guarantor and deposit options</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>DIY dispute toolkit</h3>
+            <ul>
+              <li>Sample letters and evidence checklist</li>
+              <li>Where to send disputes and how to track responses</li>
+              <li>Escalation if errors aren't fixed</li>
+            </ul>
+            <a href="#" aria-disabled="true">Download (ZIP) →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <div class="grid">
+          <div class="faq grid" style="gap:10px">
+            <details>
+              <summary>Can you remove a felony conviction from my record?</summary>
+              <div>
+                <p>We don't "erase" convictions. Many states offer legal relief such as expungement, sealing, certificates of rehabilitation, or pardons—each with specific eligibility rules and timelines. We screen your eligibility and, if appropriate, connect you with licensed attorneys who handle the legal filings. Outcomes vary and are not guaranteed.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Can you remove an eviction from my record?</summary>
+              <div>
+                <p>We can dispute inaccurate or outdated tenant screening data and help update records after a case is dismissed or satisfied. Some states allow court record sealing for certain eviction matters. Accurate, verifiable public records generally cannot be removed unless your state provides lawful relief.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How does rent reporting work if I have no rental history?</summary>
+              <div>
+                <p>We help set up reporting of your on-time rent to major credit bureaus (where eligible). We can also add past rent history with documentation. Not all landlords or bureaus accept all programs; we'll set up the best fit and pair it with a rental résumé and reference kit.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Is this legal? Is it credit repair?</summary>
+              <div>
+                <p>Yes—we follow federal and state laws including the Fair Credit Reporting Act (FCRA) and the Credit Repair Organizations Act (CROA). We dispute only inaccurate, incomplete, outdated, or unverifiable information, and we never promise results.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How long does this take?</summary>
+              <div>
+                <p>FCRA disputes are typically 30–45 days per round. Record relief (expungement/sealing) can take 3–12 months depending on your state and case. Rent reporting setup can be as quick as 1–2 weeks.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Do you offer refunds?</summary>
+              <div>
+                <p>You may cancel within three business days of signing any paid agreement for a full refund. After work begins, refunds depend on work completed to date. We'll outline this clearly in writing.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compliance" class="section">
+      <div class="container">
+        <h2>Compliance and consumer protections</h2>
+        <div class="legal">
+          <ul>
+            <li><strong>CROA Disclosure:</strong> You have the right to dispute inaccurate information in your credit report for free by contacting the credit bureaus directly. You are not required to pay for credit repair services.</li>
+            <li><strong>Three-Day Cancellation:</strong> You may cancel any paid agreement with us within three business days.</li>
+            <li><strong>No Legal Advice:</strong> POWER PLAY Resource Center is not a law firm and does not provide legal advice. If legal services are needed, we will refer you to licensed attorneys.</li>
+            <li><strong>No Guarantees:</strong> We do not guarantee outcomes. Timeframes and results vary by case and jurisdiction.</li>
+            <li><strong>Privacy:</strong> We safeguard your data and never sell your information.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="consult" class="section">
+      <div class="container">
+        <h2>Book your free eligibility check</h2>
+        <div class="card" style="padding: 20px;">
+            <p style="text-align: center; margin-bottom: 20px;">Select a date and time that works for you. We offer consultations Monday - Friday, 7:00 AM to 4:30 PM.</p>
+            <!-- Updated Zoho Booking Embed -->
+            <iframe width='100%' height='750px' src='https://powerplayresourcecenter.zohobookings.com/portal-embed#/4769724000000052002' frameborder='0' allowfullscreen='' ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="section">
+      <div class="container">
+        <h2>Terms & Privacy</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Terms of Service</h3>
+            <p class="muted">Summary of key points:</p>
+            <ul>
+              <li>Services are provided "as-is"; no outcome is guaranteed.</li>
+              <li>We work only on inaccurate, incomplete, outdated, or unverifiable items.</li>
+              <li>Legal services are provided by independent attorneys under separate agreements.</li>
+              <li>Billing, cancellations, and refunds will be clearly disclosed before any charge.</li>
+            </ul>
+          </div>
+          <div class="card" id="privacy" style="padding:16px">
+            <h3>Privacy Policy</h3>
+            <ul>
+              <li>We collect only the data needed to serve you.</li>
+              <li>We never sell your personal information.</li>
+              <li>Access is restricted and encrypted at rest and in transit.</li>
+              <li>You may request deletion of your data at any time.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <div class="logo" style="margin-bottom:8px">
+            <div class="logo-badge" aria-hidden="true">PP</div>
+            <span>POWER PLAY</span>
+          </div>
+          <p>Ethical help for eviction records, conviction record relief, and rental history building. Based in Albuquerque, New Mexico.</p>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li>Email: <a href="mailto:support@powerplayrc.com">support@powerplayrc.com</a></li>
+            <li>Phone: <a href="tel:+15055957861">(505) 595-7861</a></li>
+            <li>Hours: Mon–Fri, 7am–4:30pm</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Connect</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li><a href="https://www.instagram.com/power_playrc/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61582673139217" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="disclaimer" style="margin-top:10px">© <span id="year"></span> POWER PLAY Resource Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple pre-check logic for demo
+    const form = document.getElementById('precheck');
+    const result = document.getElementById('precheck-result');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const state = document.getElementById('state').value;
+      const focus = document.getElementById('focus').value;
+      let msg = "Thanks! We'll email you your state-specific next steps.";
+      if(focus.includes('Record relief')){
+        msg = "Record relief options vary by state and offense. We'll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
+      } else if(focus.includes('Eviction')){
+        msg = "We'll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
+      } else if(focus.includes('Build rental')){
+        msg = "We'll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
+      }
+      result.textContent = msg;
+      result.style.display = 'block';
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"POWER PLAY Resource Center",
+    "url":"https://www.powerplay.example",
+    "email":"support@powerplayrc.com",
+    "telephone":"+15055957861",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Albuquerque",
+      "addressRegion":"NM",
+      "addressCountry":"US"
+    },
+    "sameAs": [
+      "https://www.instagram.com/power_playrc/",
+      "https://www.facebook.com/profile.php?id=61582673139217"
+    ],
+    "description":"Ethical help for eviction records, record relief, and rental history building. Based in Albuquerque, New Mexico."
+  }
+  </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POWER PLAY Resource Center | Evictions • Record Relief • Rental History</title>
+  <meta name="description" content="POWER PLAY Resource Center in Albuquerque, New Mexico helps correct credit and screening errors, address eviction records, explore expungement and record sealing eligibility, and build rental history with rent reporting and application coaching." />
+  <meta name="theme-color" content="#0e6efb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --brand:#0e6efb;
+      --brand-dark:#0b53bc;
+      --ink:#0e1726;
+      --muted:#5b6473;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --ok:#0bb07b;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ring: 0 0 0 4px rgba(14,110,251,.15);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0; scroll-behavior: smooth;}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--ink); background:var(--bg); line-height:1.5;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{color:var(--brand-dark); text-decoration:underline}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .topbar{
+      background:#0b1530; color:#cad2e2; font-size:14px;
+      padding:8px 0;
+    }
+    .topbar .row{display:flex; align-items:center; justify-content:space-between}
+    .topbar a{color:#e6edff; text-decoration:none}
+    header{
+      background:var(--card);
+      position:sticky; top:0; z-index:40; border-bottom:1px solid #e9eef6;
+    }
+    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px}
+    .logo-badge{
+      width:34px; height:34px; border-radius:8px; background:linear-gradient(140deg, var(--brand), #56b1ff);
+      display:grid; place-items:center; color:white; font-weight:900; letter-spacing:-.5px;
+      box-shadow:0 10px 20px rgba(14,110,251,.25);
+    }
+    .nav-links{display:flex; gap:20px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--brand); color:white; border:none; border-radius:12px; padding:12px 18px; font-weight:700; cursor:pointer;
+      box-shadow:0 8px 18px rgba(14,110,251,.25);
+    }
+    .btn:hover{background:var(--brand-dark)}
+    .btn.outline{background:transparent; color:var(--brand); border:2px solid var(--brand); box-shadow:none}
+    .hero{
+      padding:40px 0 24px; background:
+        radial-gradient(1200px 400px at 50% -200px, rgba(14,110,251,.08), transparent),
+        linear-gradient(#ffffff, #f7f9fc 40%);
+      border-bottom:1px solid #e9eef6;
+    }
+    .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:26px; align-items:center}
+    .h1{
+      font-size:40px; line-height:1.15; margin:6px 0 14px; letter-spacing:-.5px; font-weight:800;
+    }
+    .sub{color:var(--muted); font-size:18px; margin-bottom:18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 20px}
+    .pill{
+      background:#eef4ff; color:#1945a5; padding:6px 10px; border-radius:999px; font-weight:600; font-size:13px;
+      border:1px solid #dbe7ff;
+    }
+    .card{
+      background:var(--card); border:1px solid #e9eef6; border-radius:var(--radius);
+      box-shadow:0 12px 30px rgba(10,32,66,.06);
+    }
+    .hero-card{padding:16px}
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px}
+    .kpi{background:#f5f8ff; border:1px dashed #cfe0ff; border-radius:12px; padding:10px; text-align:center}
+    .kpi strong{font-size:18px}
+    .section{padding:38px 0}
+    .section h2{font-size:28px; margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:16px}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .cols-2{grid-template-columns:repeat(2,1fr)}
+    .service{padding:18px}
+    .service h3{margin:0 0 6px}
+    .service iframe {
+        margin-top: 16px;
+        border-radius: 8px;
+        border: 1px solid #e9eef6;
+    }
+    ul{padding-left:18px; margin:8px 0}
+    .steps{counter-reset:step}
+    .step{
+      padding:16px; display:flex; gap:12px; align-items:flex-start; border-left:4px solid #dbe7ff; border-radius:10px; background:#fff
+    }
+    .step .num{
+      width:28px; height:28px; border-radius:50%; background:#eef4ff; color:#1945a5; display:grid; place-items:center; font-weight:700
+    }
+    .cta{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px
+    }
+    .notice{
+      background:#fff6e6; color:#7a4b00; border:1px solid #ffd9a8; border-radius:12px; padding:12px; font-size:14px
+    }
+    .legal{
+      background:#f4f6fb; border:1px solid #e1e6f0; padding:14px; border-radius:12px; font-size:14px; color:#374151
+    }
+    .faq details{background:#fff; border:1px solid #e9eef6; border-radius:12px; padding:12px}
+    .faq summary{cursor:pointer; font-weight:600}
+    .tag{font-size:12px; font-weight:700; color:#1945a5; background:#eef4ff; border:1px solid #dbe7ff; padding:3px 6px; border-radius:999px}
+    .cards{display:grid; gap:12px}
+    .plan{padding:16px}
+    .price{font-size:26px; font-weight:800}
+    .footer{padding:26px 0; color:#6b7280}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    input,select,textarea{
+      width:100%; padding:12px; border-radius:10px; border:1px solid #cdd7e5; font:inherit; background:white
+    }
+    input:focus,select:focus,textarea:focus{outline:none; box-shadow:var(--ring); border-color:var(--brand)}
+    label{font-weight:600; font-size:14px}
+    form .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .disclaimer{font-size:12px; color:#6b7280}
+    .trust{display:flex; gap:16px; align-items:center; flex-wrap:wrap; color:#6b7280; font-size:14px}
+    .trust .dot{width:8px; height:8px; background:#cfe0ff; border-radius:999px}
+    .mobile-nav{display:none}
+    /* About Us Page Styles */
+    .about-header { background: var(--brand); color: white; padding: 40px 0; text-align: center; }
+    .about-header h1 { margin: 0; font-size: 2.5rem; }
+    .about-header p { font-size: 1.1rem; opacity: 0.9; }
+    .about-content { background: white; margin-top: -30px; border-radius: var(--radius); padding: 40px; box-shadow: 0 8px 32px rgba(14,110,251,0.07); }
+    .about-content h2 { color: var(--brand); border-bottom: 2px solid #e9eef6; padding-bottom: 10px; margin-top: 30px;}
+    .about-content h2:first-child { margin-top: 0; }
+    .about-content ul { list-style-type: none; padding-left: 0; }
+    .about-content ul li { background: #f7f9fc; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--brand); }
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .cols-3{grid-template-columns:1fr}
+      .cols-2{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .mobile-nav{display:block}
+      /* Adjust footer for smaller screens to stack cols */
+      .footer .grid { grid-template-columns: 1fr; text-align: center; gap: 20px;}
+      .footer .logo { justify-content: center; }
+      .footer ul { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container row">
+      <div>☎ Free Eligibility Check: <a href="tel:+15055957861" aria-label="Call now">(505) 595-7861</a></div>
+      <div><a href="#consult">Book a consult</a> · <a href="#faq">FAQ</a></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <div class="logo-badge" aria-hidden="true">PP</div>
+          <span>POWER PLAY Resource Center</span>
+        </div>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#about">About Us</a>
+          <a href="#how">How it works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="mobile-nav">
+          <a class="btn outline" href="#consult">Free consult</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badges">
+            <span class="pill">Housing-focused credit help</span>
+            <span class="pill">Legal & ethical approach</span>
+            <span class="pill">Based in Albuquerque, NM</span>
+          </div>
+          <h1 class="h1">A second chance for housing and credit</h1>
+          <p class="sub">We help you address eviction records, explore record relief for convictions (expungement/sealing eligibility), and build rental history—so you can qualify for better housing with confidence.</p>
+          <div class="cta">
+            <a class="btn" href="#consult">Get my free eligibility check</a>
+            <a class="btn outline" href="#services">See how we help</a>
+          </div>
+          <div style="margin-top:10px" class="trust">
+            <span class="dot"></span> No high-pressure sales
+            <span class="dot"></span> Transparent pricing
+            <span class="dot"></span> Results not guaranteed—always honest about odds
+          </div>
+        </div>
+        <div>
+          <div class="card hero-card" aria-labelledby="quick-check">
+            <h2 id="quick-check">Quick pre-check</h2>
+            <p class="muted" style="margin-top:-6px">Tell us where you live and what you need. We'll flag likely options in 1 minute.</p>
+            <form id="precheck">
+              <div class="row">
+                <div>
+                  <label for="name">Full name</label>
+                  <input id="name" name="name" placeholder="First Last" required />
+                </div>
+                <div>
+                  <label for="state">State</label>
+                  <select id="state" name="state" required>
+                    <option value="">Choose…</option>
+                    <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                    <option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option>
+                    <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                    <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                    <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                    <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                    <option>NJ</option><option>NM selected</option><option>NY</option><option>NC</option><option>ND</option>
+                    <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                    <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                    <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
+                    <option>WY</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" style="margin-top:10px">
+                <div>
+                  <label for="focus">Main goal</label>
+                  <select id="focus" name="focus" required>
+                    <option value="">Choose…</option>
+                    <option>Fix eviction records</option>
+                    <option>Record relief for felony/conviction</option>
+                    <option>Build rental history (no history)</option>
+                    <option>General credit clean-up</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" placeholder="you@example.com" required />
+                </div>
+              </div>
+              <div style="margin-top:10px">
+                <label for="notes">Anything else we should know? <span class="muted">(optional)</span></label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Example: eviction in 2021, case paid; misdemeanor from 2017; no rental history."></textarea>
+              </div>
+              <div style="margin-top:10px">
+                <button class="btn" type="submit">Check my options</button>
+              </div>
+              <p class="disclaimer" style="margin-top:8px">By submitting, you agree to our <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>. We won't spam you.</p>
+            </form>
+            <div id="precheck-result" class="notice" style="display:none; margin-top:12px" role="status" aria-live="polite"></div>
+            <div class="kpis" aria-label="Quick facts">
+              <div class="kpi"><strong>50+</strong><div class="muted">State-by-state guides</div></div>
+              <div class="kpi"><strong>3–6 mo</strong><div class="muted">Typical record-relief timeline</div></div>
+              <div class="kpi"><strong>72h</strong><div class="muted">No-risk cancellation</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section" style="background:var(--bg); padding-top: 0;">
+      <div class="container about-content">
+        <h2>Our Mission</h2>
+        <p class="mission">
+          At POWER PLAY Resource Center, we believe that everyone deserves a safe, stable place to call home—no matter their past or where they're starting from. Our passion is helping people who have made mistakes, faced setbacks, or are just getting started on their own, to have a real opportunity to obtain suitable housing and build a brighter future.
+        </p>
+        <h2>Why We Do This Work</h2>
+        <p>
+          We know that a single eviction, a past conviction, or a lack of rental history can close doors for good people. We've seen firsthand how hard it can be to move forward when the system keeps reminding you of your past. That's why we're here: to help you clear obstacles, understand your rights, and present your best self to landlords and lenders.
+        </p>
+        <ul>
+          <li><strong>Second Chances:</strong> We believe in redemption and new beginnings for everyone.</li>
+          <li><strong>Respect & Dignity:</strong> We treat every client with compassion, confidentiality, and respect.</li>
+          <li><strong>Empowerment:</strong> We give you the tools, knowledge, and support to advocate for yourself.</li>
+          <li><strong>Integrity:</strong> We are honest about what's possible and never make false promises.</li>
+          <li><strong>Community:</strong> We're proud to serve Albuquerque and the greater New Mexico community.</li>
+        </ul>
+        <h2>Who We Help</h2>
+        <p>
+          Whether you're rebuilding after a mistake, aging out of foster care, starting over after a tough time, or just need a fair shot at your first apartment, we're here for you. Our team works with people from all walks of life—because everyone deserves a place to call home.
+        </p>
+        <h2>Meet Our Team</h2>
+        <p>
+          POWER PLAY Resource Center is made up of dedicated advocates, housing specialists, and credit experts who care deeply about your success. We bring years of experience in housing, credit, and community support, and we're committed to walking with you every step of the way.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>What we specialize in</h2>
+        <p class="muted">We work within the law to help correct inaccuracies, pursue eligible record relief, and build a rental profile landlords trust.</p>
+        <div class="grid cols-3">
+          <div class="card service">
+            <span class="tag">Eviction record solutions</span>
+            <h3>Address eviction history the right way</h3>
+            <ul>
+              <li>Dispute inaccurate, outdated, or unverifiable screening data</li>
+              <li>Update tenant screening and credit files after judgments are satisfied</li>
+              <li>Explore court record sealing/expungement where your state allows</li>
+              <li>Landlord reference strategy + application coaching</li>
+            </ul>
+            <p class="disclaimer">We don't remove accurate, verifiable public records. We help fix errors and pursue lawful remedies.</p>
+            <iframe src="https://forms.gle/vFGRDucVWqBJvwr1A" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Eviction Report Removal Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">Record relief (expungement/sealing)</span>
+            <h3>Second-chance pathways for convictions</h3>
+            <ul>
+              <li>Eligibility screening by jurisdiction and offense type</li>
+              <li>Referrals to licensed attorneys for legal filings and hearings</li>
+              <li>Certificate of rehabilitation and pardon guidance</li>
+              <li>Post-relief updates to background and screening providers</li>
+            </ul>
+            <p class="disclaimer">We are not a law firm and do not provide legal advice. Legal work is handled by partner attorneys where permitted.</p>
+            <iframe src="https://forms.gle/KDnrT4XWq7DZsmHJ8" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="Conviction Relief Form">Loading…</iframe>
+          </div>
+          <div class="card service">
+            <span class="tag">No rental history support</span>
+            <h3>Build a rental profile from zero</h3>
+            <ul>
+              <li>Rent reporting to major credit bureaus (current and past rent)</li>
+              <li>Rental résumé + Letter of Explanation + reference kit</li>
+              <li>Guarantor/co-signer options and alternative deposits</li>
+              <li>Budgeting and credit-building plan for approval odds</li>
+            </ul>
+            <p class="disclaimer">Reporting availability varies by landlord and bureau. We'll set up the best option for your situation.</p>
+            <iframe src="https://forms.gle/frzpkXEXy6QLHP7X6" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0" title="No Rental History Form">Loading…</iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="grid steps">
+          <div class="step card">
+            <div class="num">1</div>
+            <div>
+              <strong>Free 15‑minute eligibility check</strong>
+              <p class="muted">We review your goals, state rules, and timeline. If we can't help, we'll tell you immediately.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">2</div>
+            <div>
+              <strong>Collect documents</strong>
+              <p class="muted">Credit/tenant screening reports, court dockets, proof of payment, and IDs. We draft disputes or refer to counsel if legal filings are needed.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">3</div>
+            <div>
+              <strong>Action plan</strong>
+              <p class="muted">Dispute inaccurate items, pursue record relief where eligible, and set up rent reporting + a rental résumé to improve your applications.</p>
+            </div>
+          </div>
+          <div class="step card">
+            <div class="num">4</div>
+            <div>
+              <strong>Updates and verification</strong>
+              <p class="muted">We monitor responses, verify changes, and package your approvals kit for landlords.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cta" style="margin-top: 24px; justify-content: center;">
+            <a class="btn" href="#consult">Book Your Free Consultation</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2>Simple, transparent pricing</h2>
+        <div class="grid cols-3 cards">
+          <div class="card plan">
+            <span class="tag">Start here</span>
+            <h3>Free consult</h3>
+            <p class="muted">15 minutes · Honest assessment</p>
+            <p class="price">$0</p>
+            <ul>
+              <li>State-specific eligibility snapshot</li>
+              <li>Timeline & odds discussion</li>
+              <li>No obligation</li>
+            </ul>
+            <a class="btn" href="#consult">Book now</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Most popular</span>
+            <h3>Rental Readiness Pack</h3>
+            <p class="muted">For no/limited rental history</p>
+            <p class="price">$199</p>
+            <ul>
+              <li>Rent reporting setup (where eligible)</li>
+              <li>Rental résumé + references + LOE</li>
+              <li>Landlord application coaching</li>
+            </ul>
+            <a class="btn" href="#consult">Get started</a>
+          </div>
+          <div class="card plan">
+            <span class="tag">Hands-on help</span>
+            <h3>Record & Eviction Support</h3>
+            <p class="muted">Custom plan · varies by case</p>
+            <p class="price">From $79/mo</p>
+            <ul>
+              <li>FCRA disputes for inaccuracies</li>
+              <li>Attorney referrals for expungement/sealing</li>
+              <li>Screening provider updates & verification</li>
+            </ul>
+            <a class="btn" href="#consult">See options</a>
+          </div>
+        </div>
+        <p class="disclaimer" style="margin-top:10px">You may cancel within 3 business days of signing any paid agreement. You can dispute credit report errors on your own at no cost—ask us for a free DIY guide.</p>
+      </div>
+    </section>
+
+    <section id="resources" class="section">
+      <div class="container">
+        <h2>Guides & resources</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Evictions and tenant screening: what landlords see</h3>
+            <ul>
+              <li>How eviction filings and judgments flow to screening companies</li>
+              <li>Disputing inaccurate or outdated records under the FCRA</li>
+              <li>State sealing/expungement basics</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>Record relief 101: expungement vs. sealing vs. pardons</h3>
+            <ul>
+              <li>Eligibility factors and typical timelines</li>
+              <li>How relief affects background checks</li>
+              <li>Working with licensed attorneys</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>No rental history? Build your profile fast</h3>
+            <ul>
+              <li>Rent reporting and alternative data</li>
+              <li>Rental résumé + letters that work</li>
+              <li>Co-signer/guarantor and deposit options</li>
+            </ul>
+            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+          </div>
+          <div class="card" style="padding:16px">
+            <h3>DIY dispute toolkit</h3>
+            <ul>
+              <li>Sample letters and evidence checklist</li>
+              <li>Where to send disputes and how to track responses</li>
+              <li>Escalation if errors aren't fixed</li>
+            </ul>
+            <a href="#" aria-disabled="true">Download (ZIP) →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <div class="grid">
+          <div class="faq grid" style="gap:10px">
+            <details>
+              <summary>Can you remove a felony conviction from my record?</summary>
+              <div>
+                <p>We don't "erase" convictions. Many states offer legal relief such as expungement, sealing, certificates of rehabilitation, or pardons—each with specific eligibility rules and timelines. We screen your eligibility and, if appropriate, connect you with licensed attorneys who handle the legal filings. Outcomes vary and are not guaranteed.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Can you remove an eviction from my record?</summary>
+              <div>
+                <p>We can dispute inaccurate or outdated tenant screening data and help update records after a case is dismissed or satisfied. Some states allow court record sealing for certain eviction matters. Accurate, verifiable public records generally cannot be removed unless your state provides lawful relief.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How does rent reporting work if I have no rental history?</summary>
+              <div>
+                <p>We help set up reporting of your on-time rent to major credit bureaus (where eligible). We can also add past rent history with documentation. Not all landlords or bureaus accept all programs; we'll set up the best fit and pair it with a rental résumé and reference kit.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Is this legal? Is it credit repair?</summary>
+              <div>
+                <p>Yes—we follow federal and state laws including the Fair Credit Reporting Act (FCRA) and the Credit Repair Organizations Act (CROA). We dispute only inaccurate, incomplete, outdated, or unverifiable information, and we never promise results.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How long does this take?</summary>
+              <div>
+                <p>FCRA disputes are typically 30–45 days per round. Record relief (expungement/sealing) can take 3–12 months depending on your state and case. Rent reporting setup can be as quick as 1–2 weeks.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Do you offer refunds?</summary>
+              <div>
+                <p>You may cancel within three business days of signing any paid agreement for a full refund. After work begins, refunds depend on work completed to date. We'll outline this clearly in writing.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compliance" class="section">
+      <div class="container">
+        <h2>Compliance and consumer protections</h2>
+        <div class="legal">
+          <ul>
+            <li><strong>CROA Disclosure:</strong> You have the right to dispute inaccurate information in your credit report for free by contacting the credit bureaus directly. You are not required to pay for credit repair services.</li>
+            <li><strong>Three-Day Cancellation:</strong> You may cancel any paid agreement with us within three business days.</li>
+            <li><strong>No Legal Advice:</strong> POWER PLAY Resource Center is not a law firm and does not provide legal advice. If legal services are needed, we will refer you to licensed attorneys.</li>
+            <li><strong>No Guarantees:</strong> We do not guarantee outcomes. Timeframes and results vary by case and jurisdiction.</li>
+            <li><strong>Privacy:</strong> We safeguard your data and never sell your information.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="consult" class="section">
+      <div class="container">
+        <h2>Book your free eligibility check</h2>
+        <div class="card" style="padding: 20px;">
+            <p style="text-align: center; margin-bottom: 20px;">Select a date and time that works for you. We offer consultations Monday - Friday, 7:00 AM to 4:30 PM.</p>
+            <!-- Updated Zoho Booking Embed -->
+            <iframe width='100%' height='750px' src='https://powerplayresourcecenter.zohobookings.com/portal-embed#/4769724000000052002' frameborder='0' allowfullscreen='' ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms" class="section">
+      <div class="container">
+        <h2>Terms & Privacy</h2>
+        <div class="grid cols-2">
+          <div class="card" style="padding:16px">
+            <h3>Terms of Service</h3>
+            <p class="muted">Summary of key points:</p>
+            <ul>
+              <li>Services are provided "as-is"; no outcome is guaranteed.</li>
+              <li>We work only on inaccurate, incomplete, outdated, or unverifiable items.</li>
+              <li>Legal services are provided by independent attorneys under separate agreements.</li>
+              <li>Billing, cancellations, and refunds will be clearly disclosed before any charge.</li>
+            </ul>
+          </div>
+          <div class="card" id="privacy" style="padding:16px">
+            <h3>Privacy Policy</h3>
+            <ul>
+              <li>We collect only the data needed to serve you.</li>
+              <li>We never sell your personal information.</li>
+              <li>Access is restricted and encrypted at rest and in transit.</li>
+              <li>You may request deletion of your data at any time.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="grid cols-3">
+        <div>
+          <div class="logo" style="margin-bottom:8px">
+            <div class="logo-badge" aria-hidden="true">PP</div>
+            <span>POWER PLAY</span>
+          </div>
+          <p>Ethical help for eviction records, conviction record relief, and rental history building. Based in Albuquerque, New Mexico.</p>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li>Email: <a href="mailto:support@powerplayrc.com">support@powerplayrc.com</a></li>
+            <li>Phone: <a href="tel:+15055957861">(505) 595-7861</a></li>
+            <li>Hours: Mon–Fri, 7am–4:30pm</li>
+          </ul>
+        </div>
+        <div>
+          <strong>Connect</strong>
+          <ul style="list-style:none; padding:0; margin:8px 0 0">
+            <li><a href="https://www.instagram.com/power_playrc/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61582673139217" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="disclaimer" style="margin-top:10px">© <span id="year"></span> POWER PLAY Resource Center. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple pre-check logic for demo
+    const form = document.getElementById('precheck');
+    const result = document.getElementById('precheck-result');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const state = document.getElementById('state').value;
+      const focus = document.getElementById('focus').value;
+      let msg = "Thanks! We'll email you your state-specific next steps.";
+      if(focus.includes('Record relief')){
+        msg = "Record relief options vary by state and offense. We'll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
+      } else if(focus.includes('Eviction')){
+        msg = "We'll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
+      } else if(focus.includes('Build rental')){
+        msg = "We'll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
+      }
+      result.textContent = msg;
+      result.style.display = 'block';
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"POWER PLAY Resource Center",
+    "url":"https://www.powerplay.example",
+    "email":"support@powerplayrc.com",
+    "telephone":"+15055957861",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Albuquerque",
+      "addressRegion":"NM",
+      "addressCountry":"US"
+    },
+    "sameAs": [
+      "https://www.instagram.com/power_playrc/",
+      "https://www.facebook.com/profile.php?id=61582673139217"
+    ],
     "description":"Ethical help for eviction records, record relief, and rental history building. Based in Albuquerque, New Mexico."
   }
   </script>
