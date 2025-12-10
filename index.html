@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://js.stripe.com/v3/"></script>
   <style>
     :root{
       --brand:#0e6efb;
@@ -136,6 +138,96 @@
     .about-content ul { list-style-type: none; padding-left: 0; }
     .about-content ul li { background: #f7f9fc; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--brand); }
 
+    /* Flip Book Styles */
+    .flip-book-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .flip-book {
+      width: 90%;
+      max-width: 900px;
+      height: 620px;
+      background: white;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .flip-book-page {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background: white;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.6s ease;
+      transform-origin: left center;
+    }
+    .flip-book-page.left { left: 0; border-right: 1px solid #e9eef6; }
+    .flip-book-page.right { right: 0; border-left: 1px solid #e9eef6; }
+    .flip-book-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .flip-book-nav {
+      background: var(--brand);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .flip-book-nav:hover { background: var(--brand-dark); }
+    .flip-book-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--danger);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 10;
+    }
+    .page-content h3 { color: var(--brand); margin-bottom: 10px; font-size: 20px; }
+    .page-content h4 { margin: 0 0 8px; color: #1f2937; }
+    .page-content .letter {
+      background: #f7f9fc;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--brand);
+      margin: 10px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .page-content .address {
+      background: #eef4ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-size: 13px;
+    }
+    .page-content .address strong { display: block; margin-bottom: 5px; color: var(--brand); }
+    .tip-box { background:#f0f7ff; border:1px solid #d7e7ff; padding:12px; border-radius:10px; margin-top:10px; font-size:14px; }
     @media (max-width: 900px){
       .hero-grid{grid-template-columns:1fr}
       .cols-3{grid-template-columns:1fr}
@@ -143,7 +235,10 @@
       .kpis{grid-template-columns:1fr}
       .nav-links{display:none}
       .mobile-nav{display:block}
-      /* Adjust footer for smaller screens to stack cols */
+      .flip-book { width: 95%; height: 80%; }
+      .flip-book-page { width: 100%; padding: 20px; }
+      .flip-book-page.left { border-right: none; }
+      .flip-book-page.right { display: none; }
       .footer .grid { grid-template-columns: 1fr; text-align: center; gap: 20px;}
       .footer .logo { justify-content: center; }
       .footer ul { padding: 0; }
@@ -220,7 +315,7 @@
                     <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
                     <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
                     <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
-                    <option>NJ</option><option>NM selected</option><option>NY</option><option>NC</option><option>ND</option>
+                    <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
                     <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
                     <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
                     <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option>
@@ -391,7 +486,7 @@
               <li>Timeline & odds discussion</li>
               <li>No obligation</li>
             </ul>
-            <a class="btn" href="#consult">Book now</a>
+            <a class="btn" href="#consult" onclick="handleStripeCheckout(event, 'free-consult')">Book now</a>
           </div>
           <div class="card plan">
             <span class="tag">Most popular</span>
@@ -403,7 +498,7 @@
               <li>Rental résumé + references + LOE</li>
               <li>Landlord application coaching</li>
             </ul>
-            <a class="btn" href="#consult">Get started</a>
+            <a class="btn" href="#consult" onclick="handleStripeCheckout(event, 'rental-readiness')">Get started</a>
           </div>
           <div class="card plan">
             <span class="tag">Hands-on help</span>
@@ -415,7 +510,7 @@
               <li>Attorney referrals for expungement/sealing</li>
               <li>Screening provider updates & verification</li>
             </ul>
-            <a class="btn" href="#consult">See options</a>
+            <a class="btn" href="#consult" onclick="handleStripeCheckout(event, 'record-support')">See options</a>
           </div>
         </div>
         <p class="disclaimer" style="margin-top:10px">You may cancel within 3 business days of signing any paid agreement. You can dispute credit report errors on your own at no cost—ask us for a free DIY guide.</p>
@@ -433,7 +528,7 @@
               <li>Disputing inaccurate or outdated records under the FCRA</li>
               <li>State sealing/expungement basics</li>
             </ul>
-            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+            <a href="#" onclick="openFlipBook('eviction'); return false;">View Interactive Guide →</a>
           </div>
           <div class="card" style="padding:16px">
             <h3>Record relief 101: expungement vs. sealing vs. pardons</h3>
@@ -442,7 +537,7 @@
               <li>How relief affects background checks</li>
               <li>Working with licensed attorneys</li>
             </ul>
-            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+            <a href="#" onclick="openFlipBook('record'); return false;">View Interactive Guide →</a>
           </div>
           <div class="card" style="padding:16px">
             <h3>No rental history? Build your profile fast</h3>
@@ -451,7 +546,7 @@
               <li>Rental résumé + letters that work</li>
               <li>Co-signer/guarantor and deposit options</li>
             </ul>
-            <a href="#" aria-disabled="true">Read guide (PDF) →</a>
+            <a href="#" onclick="openFlipBook('rental'); return false;">View Interactive Guide →</a>
           </div>
           <div class="card" style="padding:16px">
             <h3>DIY dispute toolkit</h3>
@@ -460,7 +555,7 @@
               <li>Where to send disputes and how to track responses</li>
               <li>Escalation if errors aren't fixed</li>
             </ul>
-            <a href="#" aria-disabled="true">Download (ZIP) →</a>
+            <a href="#" onclick="openFlipBook('toolkit'); return false;">View Interactive Toolkit →</a>
           </div>
         </div>
       </div>
@@ -532,7 +627,6 @@
         <h2>Book your free eligibility check</h2>
         <div class="card" style="padding: 20px;">
             <p style="text-align: center; margin-bottom: 20px;">Select a date and time that works for you. We offer consultations Monday - Friday, 9:00 AM to 5:00 PM.</p>
-            <!-- Zoho Booking Embed -->
             <iframe width='100%' height='750px' src='https://powerplayresourcecenter.zohobookings.com/portal-embed#/4769724000000052002' frameborder='0' allowfullscreen='' ></iframe>
         </div>
       </div>
@@ -596,26 +690,400 @@
     </div>
   </footer>
 
+  <!-- DIY Toolkit Flip Book Modal -->
+  <div id="toolkitModal" class="flip-book-container">
+    <div class="flip-book">
+      <button class="flip-book-close" onclick="closeFlipBook('toolkit')">×</button>
+      <div class="flip-book-page left" id="toolkit-page1" data-book="toolkit" data-group="1">
+        <div class="page-content">
+          <h3>DIY Dispute Toolkit</h3>
+          <h4>Sample Dispute Letter #1 - Credit Report Error</h4>
+          <div class="letter">
+            <strong>[Your Name]</strong><br>
+            [Your Address]<br>
+            [City, State ZIP]<br>
+            [Date]<br><br>
+            <strong>[Credit Bureau Name]</strong><br>
+            [Address from page 3]<br><br>
+            <strong>Re: Dispute of Inaccurate Information</strong><br>
+            <strong>Account Number: [XXXX]</strong><br><br>
+            Dear [Credit Bureau],<br><br>
+            I am writing to dispute the following information in my credit report. I have reviewed my report dated [date] and found the following item to be inaccurate:<br><br>
+            [Creditor Name] - Account #[XXXX]<br>
+            Reason for dispute: [Brief explanation - e.g., "Not my account", "Paid in full", "Incorrect late payment"]<br><br>
+            Under the Fair Credit Reporting Act (FCRA), you have 30 days to investigate this dispute and either correct the error or provide evidence that the information is accurate.<br><br>
+            Please investigate and remove this inaccurate information from my credit report. Send me an updated copy of my report once the investigation is complete.<br><br>
+            Sincerely,<br>
+            [Your Signature]<br>
+            [Your Printed Name]
+          </div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="toolkit-page2" data-book="toolkit" data-group="1">
+        <div class="page-content">
+          <h4>Sample Dispute Letter #2 - Tenant Screening Error</h4>
+          <div class="letter">
+            <strong>[Your Name]</strong><br>
+            [Your Address]<br>
+            [City, State ZIP]<br>
+            [Date]<br><br>
+            <strong>[Tenant Screening Company]</strong><br>
+            [Address from page 3]<br><br>
+            <strong>Re: Dispute of Eviction Record</strong><br>
+            <strong>Case Number: [If available]</strong><br><br>
+            To Whom It May Concern:<br><br>
+            I am writing to dispute an eviction record appearing in my tenant screening report. The record shows:<br><br>
+            [Property Address]<br>
+            [Date of filing]<br>
+            [Case outcome if known]<br><br>
+            This information is [inaccurate/outdated/incomplete] because: [Explain - e.g., "Case was dismissed", "Judgment was satisfied", "Wrong person", "Beyond reporting period"].<br><br>
+            Under the Fair Credit Reporting Act, you must investigate this dispute within 30 days and remove any inaccurate information.<br><br>
+            Please provide me with proof of the accuracy of this record or remove it from my file. Send me an updated report once complete.<br><br>
+            Thank you for your prompt attention to this matter.<br><br>
+            Sincerely,<br>
+            [Your Signature]<br>
+            [Your Printed Name]
+          </div>
+        </div>
+      </div>
+      <div class="flip-book-page left" id="toolkit-page3" data-book="toolkit" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h3>Credit Bureau Mailing Addresses</h3>
+          <div class="address">
+            <strong>Equifax</strong>
+            P.O. Box 740256<br>
+            Atlanta, GA 30374-0256<br>
+            Phone: 1-800-685-1111
+          </div>
+          <div class="address">
+            <strong>Experian</strong>
+            P.O. Box 4500<br>
+            Allen, TX 75013<br>
+            Phone: 1-888-397-3742
+          </div>
+          <div class="address">
+            <strong>TransUnion</strong>
+            P.O. Box 2000<br>
+            Chester, PA 19016-2000<br>
+            Phone: 1-800-916-8800
+          </div>
+          <div class="address">
+            <strong>Innovis</strong>
+            P.O. Box 49<br>
+            Allen, TX 75013<br>
+            Phone: 1-800-540-2505
+          </div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="toolkit-page4" data-book="toolkit" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h3>Tenant Screening Companies</h3>
+          <div class="address">
+            <strong>CoreLogic SafeRent</strong>
+            12100 Wilshire Blvd, 7th Floor<br>
+            Los Angeles, CA 90025<br>
+            Phone: 1-800-825-3692
+          </div>
+          <div class="address">
+            <strong>First Advantage</strong>
+            601 Cleveland Street<br>
+            St. Petersburg, FL 33701<br>
+            Phone: 1-800-727-5600
+          </div>
+          <div class="address">
+            <strong>LexisNexis</strong>
+            P.O. Box 105108<br>
+            Atlanta, GA 30348-5108<br>
+            Phone: 1-800-456-6004
+          </div>
+          <div class="address">
+            <strong>Yardi</strong>
+            4215 Market Street<br>
+            Riverside, CA 92501<br>
+            Phone: 1-800-473-2794
+          </div>
+        </div>
+      </div>
+      <div class="flip-book-controls">
+        <button class="flip-book-nav" onclick="previousPage('toolkit')">← Previous</button>
+        <button class="flip-book-nav" onclick="nextPage('toolkit')">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eviction/Tenant Screening Flip Book Modal -->
+  <div id="evictionModal" class="flip-book-container">
+    <div class="flip-book">
+      <button class="flip-book-close" onclick="closeFlipBook('eviction')">×</button>
+      <div class="flip-book-page left" id="eviction-page1" data-book="eviction" data-group="1">
+        <div class="page-content">
+          <h3>Evictions & Tenant Screening</h3>
+          <h4>What landlords actually see</h4>
+          <ul>
+            <li>Landlords pull tenant screening reports (CoreLogic, SafeRent, Yardi, First Advantage).</li>
+            <li>These reports ingest court data, credit data, and past landlord records.</li>
+            <li>Even dismissed filings can show up unless corrected.</li>
+          </ul>
+          <div class="tip-box">Tip: Provide proof of dismissal/satisfaction and ask screening companies to update their files.</div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="eviction-page2" data-book="eviction" data-group="1">
+        <div class="page-content">
+          <h4>Disputing inaccurate or outdated records (FCRA)</h4>
+          <ol>
+            <li>Get copies of your tenant screening & credit reports.</li>
+            <li>List each inaccurate/outdated item with supporting evidence.</li>
+            <li>Send written disputes to the screening company & bureaus.</li>
+            <li>Track responses (30 days typical) and request corrections.</li>
+          </ol>
+          <div class="tip-box">Escalate with CFPB or state AG if vendors fail to correct clear errors.</div>
+        </div>
+      </div>
+      <div class="flip-book-page left" id="eviction-page3" data-book="eviction" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>How filings flow to screening companies</h4>
+          <p>Courts send data to data brokers; brokers sell to screening vendors; landlords pull reports. Incorrect matching (name/DOB only) causes many false positives.</p>
+          <div class="tip-box">Always include middle name, prior addresses, and copy of ID to reduce mismatching.</div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="eviction-page4" data-book="eviction" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>State sealing/expungement basics</h4>
+          <ul>
+            <li>Some states seal dismissed eviction filings immediately; others require a petition.</li>
+            <li>After sealing, send the court order to screening vendors to remove the record.</li>
+            <li>Keep proof: order, docket printout, and vendor confirmation.</li>
+          </ul>
+          <div class="tip-box">We can draft a vendor update packet once your record is sealed/dismissed.</div>
+        </div>
+      </div>
+      <div class="flip-book-controls">
+        <button class="flip-book-nav" onclick="previousPage('eviction')">← Previous</button>
+        <button class="flip-book-nav" onclick="nextPage('eviction')">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Record Relief Flip Book Modal -->
+  <div id="recordModal" class="flip-book-container">
+    <div class="flip-book">
+      <button class="flip-book-close" onclick="closeFlipBook('record')">×</button>
+      <div class="flip-book-page left" id="record-page1" data-book="record" data-group="1">
+        <div class="page-content">
+          <h3>Record Relief 101</h3>
+          <h4>Expungement vs. Sealing vs. Pardons</h4>
+          <ul>
+            <li><strong>Expungement:</strong> Court orders destruction or removal from public access.</li>
+            <li><strong>Sealing:</strong> Record hidden from most checks but may remain viewable to courts/law enforcement.</li>
+            <li><strong>Pardon/Certificates:</strong> Forgiveness or proof of rehabilitation; may restore rights.</li>
+          </ul>
+          <div class="tip-box">Relief type depends on offense level, time since completion, and state statutes.</div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="record-page2" data-book="record" data-group="1">
+        <div class="page-content">
+          <h4>Eligibility factors</h4>
+          <ul>
+            <li>Disposition (dismissed, deferred, conviction).</li>
+            <li>Waiting period after completion of sentence.</li>
+            <li>Number of prior cases and severity.</li>
+            <li>Outstanding fines or restitution.</li>
+          </ul>
+          <div class="tip-box">We screen your state’s rules and prepare you for attorney review.</div>
+        </div>
+      </div>
+      <div class="flip-book-page left" id="record-page3" data-book="record" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>Timelines & background checks</h4>
+          <p>Typical timelines run 3–12 months. After relief, send orders to background vendors to ensure removal from commercial databases.</p>
+          <ul>
+            <li>Keep certified copies of orders.</li>
+            <li>Monitor major background/screening providers.</li>
+            <li>Re-run checks to confirm suppression.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="record-page4" data-book="record" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>Working with licensed attorneys</h4>
+          <ul>
+            <li>Attorneys file petitions, attend hearings, and negotiate objections.</li>
+            <li>We provide intake, document gathering, and post-relief update packets.</li>
+            <li>Clear, flat-fee expectations; refunds per attorney agreement.</li>
+          </ul>
+          <div class="tip-box">Ask about fee stages: filing, hearing, and vendor updates.</div>
+        </div>
+      </div>
+      <div class="flip-book-controls">
+        <button class="flip-book-nav" onclick="previousPage('record')">← Previous</button>
+        <button class="flip-book-nav" onclick="nextPage('record')">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rental History Flip Book Modal -->
+  <div id="rentalModal" class="flip-book-container">
+    <div class="flip-book">
+      <button class="flip-book-close" onclick="closeFlipBook('rental')">×</button>
+      <div class="flip-book-page left" id="rental-page1" data-book="rental" data-group="1">
+        <div class="page-content">
+          <h3>Build Your Rental Profile</h3>
+          <h4>Rent reporting for first-time renters</h4>
+          <ul>
+            <li>We set up monthly rent reporting to bureaus that accept it.</li>
+            <li>Backdate up to 12 months of on-time payments when documentation allows.</li>
+            <li>Pair reporting with a Rental Résumé and Letter of Explanation.</li>
+          </ul>
+          <div class="tip-box">Backdating gives a fast credibility boost—gather bank statements or ledger to verify past payments.</div>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="rental-page2" data-book="rental" data-group="1">
+        <div class="page-content">
+          <h4>Alternative data & approvals kit</h4>
+          <ul>
+            <li>Use utility/phone payment history when rent data is thin.</li>
+            <li>Create a reference kit (employer, mentor, prior roommate/RA).</li>
+            <li>Co-signer/guarantor and deposit alternatives where needed.</li>
+          </ul>
+          <div class="tip-box">We coach you on talking points for landlords and provide a ready-to-send PDF kit.</div>
+        </div>
+      </div>
+      <div class="flip-book-page left" id="rental-page3" data-book="rental" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>How rent reporting impacts scores</h4>
+          <p>Positive rental tradelines can strengthen thin credit files and help lenders/landlords see timely payments.</p>
+          <ul>
+            <li>Not all bureaus weigh rent equally; we pick the best path for you.</li>
+            <li>Late/missed payments generally are not reported in our programs.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flip-book-page right" id="rental-page4" data-book="rental" data-group="2" style="display:none;">
+        <div class="page-content">
+          <h4>Action checklist</h4>
+          <ol>
+            <li>Upload proof of past rent (receipts, bank statements, ledger).</li>
+            <li>Complete your Rental Résumé template.</li>
+            <li>Pick your target neighborhoods and price range.</li>
+            <li>Schedule a 15-min coaching call for landlord-ready messaging.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="flip-book-controls">
+        <button class="flip-book-nav" onclick="previousPage('rental')">← Previous</button>
+        <button class="flip-book-nav" onclick="nextPage('rental')">Next →</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Simple pre-check logic for demo
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_51Sctg1FNwTjPEFGLnrWd3ZQNQwbPmIO533KLjgxtoEE9QTTqnWeFGGV7JktviwmpL5qQGvc03E6LQSwLAaAj8oNe00bIYAaFje');
+
+    // Flip book state management
+    const flipState = { toolkit:1, eviction:1, record:1, rental:1 };
+    const flipTotal = { toolkit:2, eviction:2, record:2, rental:2 };
+
+    function togglePages(key){
+      document.querySelectorAll('[data-book="'+key+'"]').forEach(el=>{
+        el.style.display = Number(el.dataset.group) === flipState[key] ? 'block' : 'none';
+      });
+    }
+    function openFlipBook(key){
+      flipState[key] = 1;
+      togglePages(key);
+      document.getElementById(key+'Modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeFlipBook(key){
+      document.getElementById(key+'Modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    function nextPage(key){
+      if(flipState[key] < flipTotal[key]){
+        flipState[key]++;
+        togglePages(key);
+      }
+    }
+    function previousPage(key){
+      if(flipState[key] > 1){
+        flipState[key]--;
+        togglePages(key);
+      }
+    }
+
+    // Stripe checkout handler
+    async function handleStripeCheckout(event, plan) {
+      event.preventDefault();
+      let priceId;
+      switch(plan) {
+        case 'rental-readiness':
+          priceId = 'price_1Oxxxx'; // Replace with actual price ID
+          break;
+        case 'record-support':
+          priceId = 'price_1Oxxxx'; // Replace with actual price ID
+          break;
+        default:
+          document.getElementById('consult').scrollIntoView({ behavior: 'smooth' });
+          return;
+      }
+      try {
+        const response = await fetch('/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ priceId })
+        });
+        const session = await response.json();
+        const result = await stripe.redirectToCheckout({ sessionId: session.id });
+        if (result.error) { alert(result.error.message); }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again or contact support.');
+      }
+    }
+
+    // Enhanced pre-check with service suggestion
     const form = document.getElementById('precheck');
     const result = document.getElementById('precheck-result');
-    form.addEventListener('submit', (e)=>{
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const state = document.getElementById('state').value;
       const focus = document.getElementById('focus').value;
-      let msg = "Thanks! We'll email you your state-specific next steps.";
-      if(focus.includes('Record relief')){
-        msg = "Record relief options vary by state and offense. We'll email an eligibility checklist and offer a referral to a licensed attorney in " + state + ".";
-      } else if(focus.includes('Eviction')){
-        msg = "We'll send a dispute & court-update plan for " + state + ", plus a landlord application strategy.";
-      } else if(focus.includes('Build rental')){
-        msg = "We'll outline rent reporting options available in " + state + " and send your Rental Résumé template.";
+      const notes = document.getElementById('notes').value.toLowerCase();
+      let msg = "";
+      let suggestedService = "";
+      if (focus.includes('Record relief') || notes.includes('felony') || notes.includes('conviction') || notes.includes('misdemeanor') || notes.includes('criminal') || notes.includes('expunge')) {
+        msg = "Based on your needs, our Record Relief service would be most beneficial. We'll email you an eligibility checklist for " + state + " and offer a referral to licensed attorneys who handle expungement and sealing cases.";
+        suggestedService = "record-relief";
+      } else if (focus.includes('Eviction') || notes.includes('eviction') || notes.includes('landlord') || notes.includes('rental') || notes.includes('judgment') || notes.includes('court')) {
+        msg = "Our Eviction Record Solutions service appears to be the best fit for your situation. We'll send a dispute & court-update plan for " + state + ", plus landlord application strategies to help you move forward.";
+        suggestedService = "eviction";
+      } else if (focus.includes('Build rental') || notes.includes('no history') || notes.includes('first apartment') || notes.includes('new') || notes.includes('starting') || notes.includes('young') || notes.includes('student')) {
+        msg = "Our Rental Readiness Pack is perfect for building your rental profile from scratch. We'll outline rent reporting options available in " + state + " and send your Rental Résumé template to help you stand out to landlords.";
+        suggestedService = "rental-readiness";
+      } else {
+        msg = "Thanks! We'll email you your state-specific next steps and help determine which of our services would be most beneficial for your situation.";
+        suggestedService = "general";
       }
-      result.textContent = msg;
+      if (suggestedService === 'record-relief') {
+        msg += " Click 'Get started' in the pricing section to begin your journey.";
+      } else if (suggestedService === 'eviction') {
+        msg += " Check out our Eviction Record Solutions in the services section for detailed information.";
+      } else if (suggestedService === 'rental-readiness') {
+        msg += " The Rental Readiness Pack in our pricing section is designed specifically for your needs.";
+      }
+      result.innerHTML = msg;
       result.style.display = 'block';
     });
+
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Close flip books on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        ['toolkit','eviction','record','rental'].forEach(key => closeFlipBook(key));
+      }
+    });
   </script>
 
   <script type="application/ld+json">
