@@ -1,0 +1,28 @@
+{
+  "businessName": "power play resource centerl",
+  "businessLogo": "https://example.com/logo.png",
+  "businessInbox": "support@powerplayrc.com",
+  "businessPhone": "+1 (505) 595-7861",
+  "businessAddress": ", 7404 Cleghorn RD NW,NM 87120",
+  "primaryColor": "#4f46e5",
+  "widgetPosition": "bottom-right",
+  "timezone": "America/New_York",
+  "locale": "en-US",
+  "services": [
+    { "name": "Consultation", "durationMins": 30, "price": 49, "description": "Initial consultation" }
+  ],
+  "faqs": [
+    { "q": "Do you accept insurance?", "a": "Yes, we accept most major insurance plans." }
+  ],
+  "hours": {
+    "mon": ["09:00-17:00"],
+    "tue": ["09:00-17:00"],
+    "wed": ["09:00-17:00"],
+    "thu": ["09:00-17:00"],
+    "fri": ["09:00-16:00"],
+    "sat": [],
+    "sun": []
+  },
+  "email": { "mode": "emailjs", "emailjs": { "serviceId": "...", "templateId": "...", "publicKey": "..." } },
+  "ai": { "mode": "openai", "openai": { "baseUrl": "https://api.openai.com/v1", "apiKey": "...", "model": "gpt-4o-mini" } }
+}
