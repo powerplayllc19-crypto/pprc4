@@ -1,0 +1,7 @@
+<!-- AI Voice Secretary -->
+<iframe
+  src="https://powerplayllc19-crypto.github.io/your-ai-assistant/?widget=1&configUrl=https://example.com/config.json"
+  style="border:0; width: 100%; height: 640px;"
+  loading="lazy"
+  title="AI Voice Assistant"
+></iframe>
